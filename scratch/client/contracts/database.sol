@@ -48,20 +48,20 @@ contract database {
     newImage.ipfs_hash = ipfshash;
 
     newImage.prev_user_ipfs_hash = user_images[msg.sender];
-    // if(bytes(user_images[msg.sender]).length != 0)
-    images[user_images[msg.sender]].next_user_ipfs_hash = ipfshash;
+    if(bytes(user_images[msg.sender]).length != 0)
+      images[user_images[msg.sender]].next_user_ipfs_hash = ipfshash;
     user_images[msg.sender] = ipfshash;
     newImage.next_user_ipfs_hash = "";
     
     newImage.prev_location_ipfs_hash = location_images[location];
-    // if(bytes(location_images[location]).length != 0)
-    images[location_images[location]].next_location_ipfs_hash = ipfshash;
+    if(bytes(location_images[location]).length != 0)
+      images[location_images[location]].next_location_ipfs_hash = ipfshash;
     location_images[location] = ipfshash;
     newImage.next_location_ipfs_hash = "";
 
     newImage.prev_topic_ipfs_hash = topic_images[topic];
-    // if(bytes(topic_images[topic]).length != 0)
-    images[topic_images[location]].next_topic_ipfs_hash = ipfshash;
+    if(bytes(topic_images[topic]).length != 0)
+      images[topic_images[topic]].next_topic_ipfs_hash = ipfshash;
     topic_images[topic] = ipfshash;
     newImage.next_topic_ipfs_hash = "";
 

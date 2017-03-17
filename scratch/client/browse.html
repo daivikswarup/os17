@@ -1,22 +1,22 @@
 <template name="browse">
 	<form id="locat">
 		<div class="row">
-			        <input name="locat" type="text" class='validate locat' placeholder="Location" value="{{locat}}" required>
+			        <input name="locat" type="text" class='validate' id = 'browse-locat' placeholder="Location" value="{{locat}}" required>
 			        <label for="locat" class='active'>Location</label>
-			        <button class="btn btn-block waves-effect waves-light orange go-locat">Go!</button>
+			        <button class="btn btn-block waves-effect waves-light orange go-locat" type="submit">Go!</button>
 		</div>
 	</form>
 	<form id="topic">
 		<div class="row">
-			        <input name="topic" type="text" class='validate topic' placeholder="Topic" value="{{topic}}" required>
+			        <input name="topic" type="text" class='validate' id = 'browse-topic' placeholder="Topic" value="{{topic}}" required>
 			        <label for="topic" class='active'>Topic</label>
-			        <button class="btn btn-block waves-effect waves-light orange go-topic">Go!</button>
+			        <button class="btn btn-block waves-effect waves-light orange go-topic" type="submit">Go!</button>
 		</div>
 	</form>
 	<form id="user">
 		<div class="row">
 			        <label class='active'>My photos</label>
-			        <button class="btn btn-block waves-effect waves-light orange go-user">Go!</button>
+			        <button class="btn btn-block waves-effect waves-light orange go-user" type="submit">Go!</button>
 		</div>
 	</form>
 

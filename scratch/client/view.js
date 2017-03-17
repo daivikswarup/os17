@@ -37,6 +37,7 @@ Template.view.helpers({
 
 Template.view.events({
     'click .next_user': function(e){
+        e.preventDefault();
     	transaction = {
                 gas: 500000,
                 from: web3.eth.accounts[0]
@@ -58,6 +59,7 @@ Template.view.events({
     	});
     },
     'click .prev_user': function(e){
+        e.preventDefault();
     	transaction = {
                 gas: 500000,
                 from: web3.eth.accounts[0]
@@ -66,6 +68,7 @@ Template.view.events({
     	//address = "0x790311f15df00207c3f32d3586e73790db613167";
 		contract = web3.eth.contract(database.abi).at(address);
 		console.log('hehrre');
+        console.log(FlowRouter.getParam('hash'));
     	contract.get_user_prev(FlowRouter.getParam('hash'),transaction,function(err,new_hash){
     			if(err) throw err;
     			console.log(new_hash);
@@ -80,6 +83,7 @@ Template.view.events({
         // code goes here
     },
     'click .next_topic': function(e){
+        e.preventDefault();
     	transaction = {
                 gas: 500000,
                 from: web3.eth.accounts[0]
@@ -101,6 +105,7 @@ Template.view.events({
     	});
     },
     'click .prev_topic': function(e){
+        e.preventDefault();
     	transaction = {
                 gas: 500000,
                 from: web3.eth.accounts[0]
@@ -123,6 +128,7 @@ Template.view.events({
         // code goes here
     },
     'click .next_location': function(e){
+        e.preventDefault();
     	transaction = {
                 gas: 500000,
                 from: web3.eth.accounts[0]
@@ -144,6 +150,7 @@ Template.view.events({
     	});
     },
     'click .prev_location': function(e){
+        e.preventDefault();
     	transaction = {
                 gas: 500000,
                 from: web3.eth.accounts[0]
@@ -166,9 +173,11 @@ Template.view.events({
         // code goes here
     },
     'click .upload': function(e){
+                    e.preventDefault();
     				FlowRouter.redirect('/');
     },
     'click .delete': function(e){
+                    e.preventDefault();
     				transaction = {
 			                gas: 500000,
 			                from: web3.eth.accounts[0]

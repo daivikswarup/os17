@@ -1,15 +1,16 @@
 Template.browse.events({
-  'submit form .locat': function (e, tmpl) {
+  'click .go-locat': function (e) {
+    e.preventDefault();
     transaction = {
                 gas: 500000,
                 from: web3.eth.accounts[0]
                 //from: "0x6e53e0a1f2373ba4b7d9d8fd4aeba07174830611"
             };
         //address = "0x76888bd4ac074939fae8a12ca72a786a6a31fc7a";
-        contract = web3.eth.contract(database.abi).at(address);
         console.log('hehrre');
-        locat = e.target.locat.value;
-        contract.get_location_prev('',locat,transaction,function(err,new_hash){
+        contract = web3.eth.contract(database.abi).at(address);
+        locat = document.getElementById('browse-locat').value;
+        contract.get_location_prev(locat,'',transaction,function(err,new_hash){
                 if(err) throw err;
                 console.log(new_hash);
                 if(new_hash!="")
@@ -27,7 +28,8 @@ Template.browse.events({
     //     });
 
   },
-  'submit form .topic': function (e, tmpl) {
+  'click .go-topic': function (e) {
+    e.preventDefault();
     transaction = {
                 gas: 500000,
                 from: web3.eth.accounts[0]
@@ -36,8 +38,8 @@ Template.browse.events({
         //address = "0x76888bd4ac074939fae8a12ca72a786a6a31fc7a";
         contract = web3.eth.contract(database.abi).at(address);
         console.log('hehrre');
-        topic = e.target.topic.value;
-        contract.get_topic_prev('',topic,transaction,function(err,new_hash){
+        topic = document.getElementById('browse-topic').value;
+        contract.get_topic_prev(topic,'',transaction,function(err,new_hash){
                 if(err) throw err;
                 console.log(new_hash);
                 if(new_hash!="")
@@ -55,7 +57,8 @@ Template.browse.events({
     //     });
 
   },
-  'submit form .user': function (e, tmpl) {
+  'click .go-user': function (e) {
+    e.preventDefault();
     transaction = {
                 gas: 500000,
                 from: web3.eth.accounts[0]
