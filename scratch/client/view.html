@@ -1,0 +1,43 @@
+<template name="view">
+	<div class="col-md-8">
+		 <div class="row-fluid">
+		 	<!-- Hard coded. lol. -->
+		 	<p id="description"></p>
+			<img src = {{url}} style="max-height:70%; max-width:70%;" data-action="zoom">
+		 </div>
+
+		 <div class="row-fluid">
+		 	<button class="next_user">Next By User</button>
+		 </div>
+
+		 <div class="row-fluid">
+		 	<button class="prev_user">Previous By User</button>
+		 </div>
+
+		 <div class="row-fluid">
+		 	<button class="next_loc">Next By Location</button>
+		 </div>
+
+		 <div class="row-fluid">
+		 	<button class="prev_loc">Prev By Location</button>
+		 </div>
+
+		 <div class="row-fluid">
+		 	<button class="next_topic">Next By Topic</button>
+		 </div>
+
+		 <div class="row-fluid">
+		 	<button class="prev_topic">Prev By Topic</button>
+		 </div>
+		 <div class="row-fluid">
+		 	<button class="upload">Upload</button>
+		 </div>
+		 <div class="row-fluid">
+		 	<button class="delete">Delete</button>
+		 </div>
+	</div>
+	<div class="col-md-8">
+		{{>browse}}
+	</div>
+
+</template>
