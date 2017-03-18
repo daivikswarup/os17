@@ -1,6 +1,12 @@
 <template name="upload">
+
+<div>
+	{{>map}}
+</div>
+
+
  <div class="row-fluid">
-	<div class="col-md-2">
+	<div class="col-md-5">
  		  <form>
 		    <div class="row">
 		        <input name="locat" type="text" class='validate locat' id='locat_from_map' placeholder="Location" value="{{locat}}" required>
@@ -17,8 +23,9 @@
           		<button class="btn btn-block waves-effect waves-light orange upload" type='submit'>Upload!</button>
 		  </form>
 	</div>
-	<div class="col-md-10">
-		{{>map}}
+	<div class="col-md-5">
+		{{>browse}}
 	</div>
  </div>
+
 </template>

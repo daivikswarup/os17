@@ -2,6 +2,7 @@
 Meteor.startup(function() {
   $(window).resize(function() {
     $('#map').css('height', window.innerHeight - 82 - 45);
+    console.log(window.innerHeight - 82 - 45);
   });
   $(window).resize(); // trigger resize event 
 });

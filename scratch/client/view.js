@@ -27,9 +27,9 @@ fetch1 = function () {
 
 Template.view.helpers({
      url: function () {
-
-        return 'http://localhost:8080/ipfs/' + FlowRouter.getParam('hash');
         fetch1();
+        return 'http://localhost:8080/ipfs/' + FlowRouter.getParam('hash');
+        
 
     }
 });
@@ -51,7 +51,6 @@ Template.view.events({
     			console.log(new_hash);
     			if(new_hash!=""){
     				FlowRouter.redirect('/view/'+new_hash);
-    				fetch1();
     			}
     			else
     				console.log('End of list');
@@ -74,7 +73,6 @@ Template.view.events({
     			console.log(new_hash);
     			if(new_hash!=""){
     				FlowRouter.redirect('/view/'+new_hash);
-    				fetch1();
     			}
     			else
     				console.log('End of list');
@@ -97,7 +95,6 @@ Template.view.events({
     			console.log(new_hash);
     			if(new_hash!=""){
     				FlowRouter.redirect('/view/'+new_hash);
-    				fetch1();
     			}
     			else
     				console.log('End of list');
@@ -119,7 +116,6 @@ Template.view.events({
     			console.log(new_hash);
     			if(new_hash!=""){
     				FlowRouter.redirect('/view/'+new_hash);
-    				fetch1();
     			}
     			else
     				console.log('End of list');
@@ -142,7 +138,6 @@ Template.view.events({
     			console.log(new_hash);
     			if(new_hash!=""){
     				FlowRouter.redirect('/view/'+new_hash);
-    				fetch1();
     			}
     			else
     				console.log('End of list');
@@ -164,7 +159,6 @@ Template.view.events({
     			console.log(new_hash);
     			if(new_hash!=""){
     				FlowRouter.redirect('/view/'+new_hash);
-    				fetch1();
     			}
     			else
     				console.log('End of list');
