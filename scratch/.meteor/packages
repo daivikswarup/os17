@@ -26,9 +26,14 @@ ethereum:elements
 ethereum:blocks
 frozeman:template-var
 frozeman:persistent-minimongo2
-kadira:flow-router
 kadira:blaze-layout
 less
 inno:zoom
 bevanhunt:leaflet
 silentcicero:solc
+ethereum:accounts
+showdown
+pcel:serialize
+hitchcott:ez-modal
+kadira:flow-router
+materialize:materialize

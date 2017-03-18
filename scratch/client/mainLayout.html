@@ -1,7 +1,14 @@
 <template name="mainLayout">
-  <header><h1>ethPhoto</h1></header>
+<head>ethPhoto</head>
+  {{> navbar}}
   <main>
+  <div class="row">
+  	<div class = "col">		
+		<div>
+			{{>map}}
+		</div>
+  	</div>	
     {{>Template.dynamic template=content}}
+   </div>
   </main>
-  <footer>Daivik Swarup</footer>
 </template>

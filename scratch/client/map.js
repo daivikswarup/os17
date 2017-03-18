@@ -1,11 +1,5 @@
 // on startup run resizing event
-Meteor.startup(function() {
-  $(window).resize(function() {
-    $('#map').css('height', window.innerHeight - 82 - 45);
-    console.log(window.innerHeight - 82 - 45);
-  });
-  $(window).resize(); // trigger resize event 
-});
+
  
 // create marker collection
 var Markers = new Meteor.Collection('markers');
@@ -23,6 +17,7 @@ Template.map.rendered = function() {
 
   map.on('dblclick', function(event) {
     document.getElementById('locat_from_map').value= JSON.stringify(event.latlng);
+    document.getElementById('browse-locat').value= JSON.stringify(event.latlng);
     console.log(event.latlng);
     // Markers. = [{latlng: event.latlng}];
   });

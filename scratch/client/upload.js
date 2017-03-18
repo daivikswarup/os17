@@ -2,9 +2,10 @@ Template.upload.events({
   'submit form': function (e, tmpl) {
     // address = "0x790311f15df00207c3f32d3586e73790db613167";
     e.preventDefault();
+    TemplateVar.set('uploading', true)
     transaction = {
                 gas: 2000000,
-                from: web3.eth.accounts[0]
+                from: app.getDefaultAddress()
                 //from: "0x6e53e0a1f2373ba4b7d9d8fd4aeba07174830611"
             };
     contract = web3.eth.contract(database.abi).at(address);
@@ -20,12 +21,21 @@ Template.upload.events({
             data = new Buffer( reader.result );
             console.log(data);
             ipfs.add(data, function(err,hash){
-                if(err){console.log("that error"); throw err;}
-                console.log(hash[0].hash);
-                contract.upload(hash[0].hash,locat,topic,transaction,function(err,data){
-                        if(err){ console.log("this error");throw err;}
+                if(err){
+                    console.log("that error"); 
+                    TemplateVar.set(tmpl,'uploading',true); 
+                    throw err;}
+                console.log(hash);
+                contract.upload(hash,locat,topic,transaction,function(err,data){
+                        if(err){ 
+                                TemplateVar.set(tmpl,'uploading', false);
+                                TemplateVar.set(tmpl,'error',true);
+                                console.log("this error");
+                                throw err;}
                         console.log(data);
-                        FlowRouter.redirect('/view/'+hash[0].hash)
+                        TemplateVar.set(tmpl,'error',false);
+                        TemplateVar.set(tmpl,'uploading', false)
+                        // FlowRouter.redirect('/view/'+hash[0].hash)
                 });
             });
           };

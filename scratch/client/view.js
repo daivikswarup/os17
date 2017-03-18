@@ -8,7 +8,7 @@ fetch1 = function () {
 
         transaction = {
                 gas: 500000,
-                from: web3.eth.accounts[0]
+                from: app.getDefaultAddress()
                 //from: "0x6e53e0a1f2373ba4b7d9d8fd4aeba07174830611"
             };
     	//address = "0x790311f15df00207c3f32d3586e73790db613167";
@@ -34,13 +34,14 @@ Template.view.helpers({
     }
 });
 
+//Template.view.onCreated(function(e){fetch1();})
 
 Template.view.events({
     'click .next_user': function(e){
         e.preventDefault();
     	transaction = {
                 gas: 500000,
-                from: web3.eth.accounts[0]
+                from: app.getDefaultAddress()
                 //from: "0x6e53e0a1f2373ba4b7d9d8fd4aeba07174830611"
             };
     	//address = "0x790311f15df00207c3f32d3586e73790db613167";
@@ -61,7 +62,7 @@ Template.view.events({
         e.preventDefault();
     	transaction = {
                 gas: 500000,
-                from: web3.eth.accounts[0]
+                from: app.getDefaultAddress()
                 //from: "0x6e53e0a1f2373ba4b7d9d8fd4aeba07174830611"
             };
     	//address = "0x790311f15df00207c3f32d3586e73790db613167";
@@ -84,7 +85,7 @@ Template.view.events({
         e.preventDefault();
     	transaction = {
                 gas: 500000,
-                from: web3.eth.accounts[0]
+                from: app.getDefaultAddress()
                 //from: "0x6e53e0a1f2373ba4b7d9d8fd4aeba07174830611"
             };
     	//address = "0x790311f15df00207c3f32d3586e73790db613167";
@@ -105,7 +106,7 @@ Template.view.events({
         e.preventDefault();
     	transaction = {
                 gas: 500000,
-                from: web3.eth.accounts[0]
+                from: app.getDefaultAddress()
                 //from: "0x6e53e0a1f2373ba4b7d9d8fd4aeba07174830611"
             };
     	//address = "0x790311f15df00207c3f32d3586e73790db613167";
@@ -127,7 +128,7 @@ Template.view.events({
         e.preventDefault();
     	transaction = {
                 gas: 500000,
-                from: web3.eth.accounts[0]
+                from: app.getDefaultAddress()
                 //from: "0x6e53e0a1f2373ba4b7d9d8fd4aeba07174830611"
             };
     	//address = "0x790311f15df00207c3f32d3586e73790db613167";
@@ -148,7 +149,7 @@ Template.view.events({
         e.preventDefault();
     	transaction = {
                 gas: 500000,
-                from: web3.eth.accounts[0]
+                from: app.getDefaultAddress()
                 //from: "0x6e53e0a1f2373ba4b7d9d8fd4aeba07174830611"
             };
     	//address = "0x790311f15df00207c3f32d3586e73790db613167";
@@ -174,7 +175,7 @@ Template.view.events({
                     e.preventDefault();
     				transaction = {
 			                gas: 500000,
-			                from: web3.eth.accounts[0]
+			                from: app.getDefaultAddress()
 			                //from: "0x6e53e0a1f2373ba4b7d9d8fd4aeba07174830611"
 			            };
 			    	//address = "0x790311f15df00207c3f32d3586e73790db613167";

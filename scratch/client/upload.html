@@ -1,31 +1,45 @@
 <template name="upload">
-
-<div>
-	{{>map}}
+<div class = "col">
+	<p> Upload panel </p>
+	{{#if TemplateVar.get "error"}}
+		<div class="row">
+			<p> Error! </p>
+		</div>
+	{{/if}}
+	 <div class="row">
+		<div class="col">
+			{{#if TemplateVar.get "uploading"}}
+	 		  	<div>
+					<div class="row">
+				      <p class="teal-text">Uploading!</p>
+				      <div class="progress">
+				        <div class="indeterminate"></div>
+				      </div>
+				    </div>
+				</div>
+			{{else}}
+				<form>
+				    <div class="row">
+				        <input name="locat" type="text" class='validate locat' id='locat_from_map' placeholder="Location" value="{{locat}}" required>
+				        <label for="locat" class='active'>Location</label>
+				    </div>
+				    <div class="row">
+				        <input name="topic" type="text" class='validate topic' placeholder="topic" value="{{topic}}" required>
+				        <label for="topic" class='active'>Topic</label>
+				    </div>
+				    <div class="row">
+				        <input name="image" type="file" class='validate file'  value="{{image}}" required>
+				        <label for="image" class='active'>Select image</label>
+				    </div>
+		          		<button class="btn btn-block waves-effect waves-light orange upload" type='submit'>Upload!</button>
+				  </form>
+				
+			{{/if}}
+		</div>
+		<div class="col">
+			{{>browse}}
+		</div>
+	 </div>
 </div>
-
-
- <div class="row-fluid">
-	<div class="col-md-5">
- 		  <form>
-		    <div class="row">
-		        <input name="locat" type="text" class='validate locat' id='locat_from_map' placeholder="Location" value="{{locat}}" required>
-		        <label for="locat" class='active'>Location</label>
-		    </div>
-		    <div class="row">
-		        <input name="topic" type="text" class='validate topic' placeholder="topic" value="{{topic}}" required>
-		        <label for="topic" class='active'>Topic</label>
-		    </div>
-		    <div class="row">
-		        <input name="image" type="file" class='validate file'  value="{{image}}" required>
-		        <label for="image" class='active'>Select image</label>
-		    </div>
-          		<button class="btn btn-block waves-effect waves-light orange upload" type='submit'>Upload!</button>
-		  </form>
-	</div>
-	<div class="col-md-5">
-		{{>browse}}
-	</div>
- </div>
 
 </template>
