@@ -32,7 +32,7 @@
 ### Account unlock:
 	personal.unlockAccount(eth.accounts[0],"<<Passowrd>>")
 
-### Minor:
+### Miner:
 	miner.start()
 	miner.stop()
     
