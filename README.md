@@ -20,3 +20,12 @@
     $cd path/to/scratch/
     $meteor
     
+    
+### To deploy the contract ####
+    [Refer here](https://github.com/ethereum/go-ethereum/wiki/Contract-Tutorial). 
+    After deploying find the contract address as ContractObj.address
+    Change the '''address=\'...\' ''' line in scratch/client/lib/init.js to this address.
+    
+    
+    
+    
