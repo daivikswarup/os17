@@ -19,4 +19,15 @@
 ### Launch Meteor ###  
     $cd path/to/scratch/
     $meteor
-    
+
+### Write this in ethereum terminal :
+### Create New Account:
+	personal.newAccount("<<Password>>")
+
+### Account unlock:
+	personal.unlockAccount(eth.accounts[0],"<<Passowrd>>")
+
+### Minor:
+	miner.start()
+	miner.stop()
+	
