@@ -16,6 +16,10 @@ contract database {
     address user;
 
   }
+  
+  string[] public places;
+  
+  
   mapping(string => image)  images;
 
   mapping(address => string)  user_images;
@@ -29,6 +33,15 @@ contract database {
   
   string public val;
 
+  function getNumPlaces() constant public returns(uint256)
+  {
+      return(places.length);
+  }
+    
+  function getPlaces(uint256 index) constant public returns(string arr)
+  {
+    return(places[index]);   
+  }
 
   // functions with the same name as the contract get invoked on deployment
   function database() public 
@@ -56,6 +69,8 @@ contract database {
     newImage.prev_location_ipfs_hash = location_images[location];
     if(bytes(location_images[location]).length != 0)
       images[location_images[location]].next_location_ipfs_hash = ipfshash;
+    else
+        places.push(location);
     location_images[location] = ipfshash;
     newImage.next_location_ipfs_hash = "";
 
@@ -72,6 +87,7 @@ contract database {
     images[ipfshash] = newImage;
     created(ipfshash,msg.sender,location,topic);
   }
+
 
   // Get previous image in list
   function get_topic_prev(string topic,string hash)  constant public returns (string) 

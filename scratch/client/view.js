@@ -124,7 +124,7 @@ Template.view.events({
     	});
         // code goes here
     },
-    'click .next_location': function(e){
+    'click .next_loc': function(e){
         e.preventDefault();
     	transaction = {
                 gas: 500000,
@@ -145,7 +145,7 @@ Template.view.events({
 
     	});
     },
-    'click .prev_location': function(e){
+    'click .prev_loc': function(e){
         e.preventDefault();
     	transaction = {
                 gas: 500000,

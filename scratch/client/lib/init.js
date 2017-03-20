@@ -1,6 +1,6 @@
 // if(typeof web3 === 'undefined')
 window.app = window.app || {}
-web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
+web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8000'));
 Meteor.startup(function () {
 	console.log('initializing accounts');
   	EthAccounts.init()
@@ -10,7 +10,7 @@ Meteor.startup(function () {
   });
   $(window).resize();
 })
-address = "0xcf8e84ccc08561a49c920b7c8a40f0456488908a";
+address = "0x7615e5eb2d4ce7f7169d7387a3484932a116c981";
 import ipfs from 'ipfs-js'
 window.ipfs = ipfs
 ipfs.setProvider()

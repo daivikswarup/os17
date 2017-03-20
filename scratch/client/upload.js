@@ -12,10 +12,12 @@ Template.upload.events({
     image = e.target.image.files[0];
     topic = e.target.topic.value;
     locat = e.target.locat.value;
+    locat_title = e.target.locat_title.value;
     console.log(image);
     console.log(topic);
     console.log(locat);
-
+    console.log(locat_title);
+    var complete_location = combineLocStr(locat,locat_title);
     reader = new FileReader();
     reader.onload = function(){
             data = new Buffer( reader.result );
@@ -26,7 +28,7 @@ Template.upload.events({
                     TemplateVar.set(tmpl,'uploading',true); 
                     throw err;}
                 console.log(hash);
-                contract.upload(hash,locat,topic,transaction,function(err,data){
+                contract.upload(hash,complete_location,topic,transaction,function(err,data){
                         if(err){ 
                                 TemplateVar.set(tmpl,'uploading', false);
                                 TemplateVar.set(tmpl,'error',true);

@@ -20,8 +20,14 @@
 			{{else}}
 				<form>
 				    <div class="row">
-				        <input name="locat" type="text" class='validate locat' id='locat_from_map' placeholder="Location" value="{{locat}}" required>
-				        <label for="locat" class='active'>Location</label>
+				    	<div class="col">
+					        <input name="locat" type="text" class='validate locat' id='locat_from_map' placeholder="Location" value="{{locat}}" required readonly>
+					        <label for="locat" class='active'>Location</label>
+					    </div>
+					    <div class="col">
+					    	<input name="locat_title" type="text" class='validate locat_title' id='locat_title_from_map' placeholder="Location Name" value="{{locat_title}}" required>
+					        <label for="locat_title" class='active'>Location</label>
+					    </div>
 				    </div>
 				    <div class="row">
 				        <input name="topic" type="text" class='validate topic' placeholder="topic" value="{{topic}}" required>
@@ -35,9 +41,6 @@
 				  </form>
 				
 			{{/if}}
-		</div>
-		<div class="col">
-			{{>browse}}
 		</div>
 	 </div>
 </div>
