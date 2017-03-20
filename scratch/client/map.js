@@ -1,11 +1,13 @@
 // on startup run resizing event
-Meteor.startup(function() {
-  $(window).resize(function() {
-    $('#map').css('height', window.innerHeight - 82 - 45);
-    console.log(window.innerHeight - 82 - 45);
-  });
-  $(window).resize(); // trigger resize event 
-});
+// Meteor.startup(function() {
+//   $(window).resize(function() {
+//     console.log('resizing');
+//     $('#map').css('height', window.innerHeight - 82 - 45);
+//     console.log(window.innerHeight - 82 - 45);
+//   });
+  
+//   $(window).resize(); // trigger resize event 
+// });
  
 // create marker collection
 var Markers = new Meteor.Collection('markers');
