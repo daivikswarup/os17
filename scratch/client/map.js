@@ -5,7 +5,7 @@
 //     $('#map').css('height', window.innerHeight - 82 - 45);
 //     console.log(window.innerHeight - 82 - 45);
 //   });
-  
+
 //   $(window).resize(); // trigger resize event 
 // });
  
@@ -119,6 +119,7 @@ Template.map.rendered = function() {
   map.addLayer(markersLayer);
 
   var controlSearch = new L.Control.Search({
+    url: 'http://nominatim.openstreetmap.org/search?format=json&q={s}',
     position:'topright',    
     layer: markersLayer,
     initial: false,
@@ -140,6 +141,16 @@ Template.map.rendered = function() {
     catch(err){};
     // Markers. = [{latlng: event.latlng}];
   });
+  map.addControl( new L.Control.Search({
+    url: 'http://nominatim.openstreetmap.org/search?format=json&q={s}',
+    jsonpParam: 'json_callback',
+    propertyName: 'display_name',
+    propertyLoc: ['lat','lon'],
+    marker: L.circleMarker([0,0],{radius:30}),
+    autoCollapse: true,
+    autoType: false,
+    minLength: 2
+  }) );
   resetMap();
   // var query = Markers.find();
   // query.observe({
