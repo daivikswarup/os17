@@ -3,7 +3,14 @@
 ## Requirements ##
 ### Meteor ###
     $curl https://install.meteor.com/ | sh
-    
+#### Pro-tips ####
+	1. Meteor and npm have a wierd bug. Configure the proxies as follows. 
+	'''
+	npm config set proxy http://user:pass@10.3.100.207:8080  
+	npm config set https-proxy http://user:pass@10.3.100.207:8080  
+	export HTTP_PROXY=http://user:pass@10.3.100.207:8080  
+	export HTTPS_PROXY=http://user:pass@10.3.100.207:8080  
+	'''
     
 ## Testing with a private network ## 
 
