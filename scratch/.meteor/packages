@@ -28,12 +28,10 @@ frozeman:template-var
 frozeman:persistent-minimongo2
 kadira:blaze-layout
 less
-inno:zoom
 silentcicero:solc
 ethereum:accounts
 showdown
 pcel:serialize
-kadira:flow-router
 materialize:materialize
 bevanhunt:leaflet
 stefcud:leaflet-search
@@ -42,3 +40,4 @@ session
 peppelg:bootstrap-3-modal
 twbs:bootstrap
 fortawesome:fontawesome
+kadira:flow-router

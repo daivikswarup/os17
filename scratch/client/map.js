@@ -50,7 +50,7 @@ resetMap = function(){
     var title = obj[2];  //value searched
     var loc = [obj[0],obj[1]];    //position found
     var marker = new L.Marker(new L.latLng(loc), {title: title} );//se property searched
-    var htmlpop = "<strong>"+title+"</strong><br><a onClick=\"loadlocation()\">Browse</a><br><a onClick=\"Modal.show('uploadModal')\">Upload</a>"
+    var htmlpop = "<strong>"+title+"</strong><br><a onClick=\"loadlocation()\">Browse</a><br><a onClick=\"{Modal.show('uploadModal');}\">Upload</a>"
     marker.bindPopup(htmlpop);
     markersLayer.addLayer(marker);
     marker.on('click', function(e){
@@ -140,6 +140,7 @@ Template.map.rendered = function() {
     console.log(event.latlng);
     try{
       Session.set('locat',getLatLngString(event.latlng["lat"],event.latlng["lng"]));
+      Session.set('locat_title','');
       Modal.show('uploadModal');
       //document.getElementById('locat_from_map').value= getLatLngString(event.latlng["lat"],event.latlng["lng"]);
     }
@@ -167,9 +168,14 @@ Template.map.rendered = function() {
     resetMap();
   }).addTo( map );
 
-  L.easyButton('fa-id-card', function(btn, map){
+  L.easyButton('fa-user-o', function(btn, map){
     console.log('clikkk2');
     Modal.show('navbarModal');
+  }).addTo( map );
+
+  L.easyButton('fa-camera', function(btn, map){
+    console.log('clikkk2');
+    loadUser();
   }).addTo( map );
   // sidebar = L.control.sidebar('sidebar').addTo(map);
   // var query = Markers.find();

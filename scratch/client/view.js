@@ -39,6 +39,14 @@ Template.viewModal.helpers({
     location: function () {
         return Session.get('View-location'); 
     },
+    isLocation: function(){
+        console.log(Session.get('viewType') == 'location');
+        return (Session.get('viewType') == 'location');
+    },
+    isUser: function(){
+        console.log(Session.get('viewType') == 'user');
+        return (Session.get('viewType') == 'user');
+    }
 
 });
 
@@ -181,7 +189,7 @@ Template.viewModal.events({
     	});
         // code goes here
     },
-    'click .upload': function(e){
+    'click .close': function(e){
                     e.preventDefault();
                     Modal.hide();
     				//FlowRouter.redirect('/');

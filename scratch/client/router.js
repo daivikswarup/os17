@@ -1,5 +1,5 @@
 FlowRouter.route('/', {
-    name: 'upload',
+    name: 'Main',
     action: function(params) {
         BlazeLayout.render("mainLayout");
     }

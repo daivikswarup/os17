@@ -1,41 +1,42 @@
 <template name="viewModal">
 	<div class="modal fade" role="dialog" >
 	`	<div class="modal-dialog" >
-			<div class="col">
-				<p> View </p>
-				 <div class="row">
-				 	<!-- Hard coded. lol. -->
-				 	<p id="User:" style="max-height:30%; max-width:30%;">{{user}}</p><br>
-				 	<p id="Topic:" style="max-height:30%; max-width:30%;">{{topic}}</p><br>
-				 	<p id="Location:" style="max-height:30%; max-width:30%;">{{location}}</p><br>
-					<img src = {{url}} style="max-height:30%; max-width:30%;" data-action="zoom">
-				 </div>
 
+			<p> View </p>
+			<div class="col center">
+				<div class = "row">
+					<div class="col left">
+						{{#if isUser}}
+							 	<button class="prev_user">Previous By User</button>
+						{{else}}
+							{{#if isLocation}}
+								 	<button class="prev_loc">Previous By Location</button>
+							{{else}}
+									<button class="prev_topic">Previous By Topic</button>
+							{{/if}}
+						{{/if}}
+					</div>
+					<div class="col">
+					 	<!-- Hard coded. lol. -->
+					 	<p id="User:" >User : {{user}}</p><br>
+					 	<p id="Topic:">Topic: {{topic}}</p><br>
+					 	<p id="Location:">Location:{{location}}</p><br>
+						<img src = {{url}} style="max-height:30%; max-width:30%;">
+					</div>
+					<div class="col right">
+						{{#if isUser}}
+							 	<button class="next_user">Next By User</button>
+						{{else}}
+							{{#if isLocation}}
+								 	<button class="next_loc">Next By Location</button>
+							{{else}}
+									<button class="next_topic">Next By Topic</button>
+							{{/if}}
+						{{/if}}
+					</div>
+				</div>
 				 <div class="row">
-				 	<button class="next_user">Next By User</button>
-				 </div>
-
-				 <div class="row">
-				 	<button class="prev_user">Previous By User</button>
-				 </div>
-
-				 <div class="row">
-				 	<button class="next_loc">Next By Location</button>
-				 </div>
-
-				 <div class="row">
-				 	<button class="prev_loc">Prev By Location</button>
-				 </div>
-
-				 <div class="row">
-				 	<button class="next_topic">Next By Topic</button>
-				 </div>
-
-				 <div class="row">
-				 	<button class="prev_topic">Prev By Topic</button>
-				 </div>
-				 <div class="row">
-				 	<button class="upload">Upload</button>
+				 	<button class="close">close</button>
 				 </div>
 				 <div class="row">
 				 	<button class="delete">Delete</button>
