@@ -125,6 +125,7 @@ Template.map.rendered = function() {
   markersLayer = new L.LayerGroup();  //layer contain searched elements
   
   map.addLayer(markersLayer);
+  map.doubleClickZoom.disable(); 
 
   var controlSearch = new L.Control.Search({
     position:'topright',    
