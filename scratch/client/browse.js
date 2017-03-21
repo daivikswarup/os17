@@ -14,7 +14,7 @@ Template.browse.events({
                 if(err) throw err;
                 console.log(new_hash);
                 if(new_hash!="")
-                    FlowRouter.redirect('/view/'+new_hash);
+                    Session.set('hash',new_hash);
                 else
                     console.log('End of list');
             });
@@ -43,7 +43,7 @@ Template.browse.events({
                 if(err) throw err;
                 console.log(new_hash);
                 if(new_hash!="")
-                    FlowRouter.redirect('/view/'+new_hash);
+                    Session.set('hash',new_hash);
                 else
                     console.log('End of list');
             });
@@ -71,7 +71,7 @@ Template.browse.events({
                 if(err) throw err;
                 console.log(new_hash);
                 if(new_hash!="")
-                    FlowRouter.redirect('/view/'+new_hash);
+                    Session.set('hash',new_hash);
                 else
                     console.log('End of list');
             });
@@ -85,4 +85,17 @@ Template.browse.events({
     //     });
 
   }
-})
+});
+
+
+Template.browse.helpers({
+        locat: function(){
+                return Session.get('locat');
+        },
+        locat_title: function(){
+                return Session.get('locat_title');
+        },
+        locat_full: function(){
+                return Session.get('locat_full');
+        }
+});

@@ -1,4 +1,4 @@
-Template.upload.events({
+Template.uploadModal.events({
   'submit form': function (e, tmpl) {
     // address = "0x790311f15df00207c3f32d3586e73790db613167";
     e.preventDefault();
@@ -37,6 +37,7 @@ Template.upload.events({
                         console.log(data);
                         TemplateVar.set(tmpl,'error',false);
                         TemplateVar.set(tmpl,'uploading', false)
+                        Modal.hide('uploadModal');
                         // FlowRouter.redirect('/view/'+hash[0].hash)
                 });
             });
@@ -52,4 +53,13 @@ Template.upload.events({
     //     });
 
   }
+});
+
+Template.uploadModal.helpers({
+        locat: function(){
+                return Session.get('locat');
+        },
+        locat_title: function(){
+                return Session.get('locat_title');
+        }
 })

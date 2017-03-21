@@ -50,22 +50,27 @@ resetMap = function(){
     var title = obj[2];  //value searched
     var loc = [obj[0],obj[1]];    //position found
     var marker = new L.Marker(new L.latLng(loc), {title: title} );//se property searched
-    marker.bindPopup(title );
+    var htmlpop = "<strong>"+title+"</strong><br><a onClick=\"loadlocation()\">Browse</a><br><a onClick=\"Modal.show('uploadModal')\">Upload</a>"
+    marker.bindPopup(htmlpop);
     markersLayer.addLayer(marker);
     marker.on('click', function(e){
       console.log(e)
       console.log('clicked! ',e.target.options.title);
       var locstr = getLatLngString(e.latlng.lat,e.latlng.lng);
-      try{
-        document.getElementById('locat_from_map').value= locstr;
-        document.getElementById('locat_title_from_map').value= e.target.options.title;
-      }
-      catch(err){};
-      try{
-        // jugaaad. lol.
-        document.getElementById('browse-locat').value= getLocatString(e.latlng.lat,e.latlng.lng,e.target.options.title);
-      }
-      catch(err){};
+      Session.set('locat',locstr);
+      Session.set('locat_title',e.target.options.title);
+      Session.set('locat_full',getLocatString(e.latlng.lat,e.latlng.lng,e.target.options.title));
+      //Modal.show('uploadModal');
+      // try{
+      //   document.getElementById('locat_from_map').value= locstr;
+      //   document.getElementById('locat_title_from_map').value= e.target.options.title;
+      // }
+      // catch(err){};
+      // try{
+      //   // jugaaad. lol.
+      //   document.getElementById('browse-locat').value= getLocatString(e.latlng.lat,e.latlng.lng,e.target.options.title);
+      // }
+      // catch(err){};
 
   });
   }
@@ -112,14 +117,16 @@ Template.map.rendered = function() {
 
   map = new L.Map('map').setView([22.316492798844163,87.30646133422853], 14);;  //set center to KGP!
 
-  map.addLayer(new L.tileLayer.provider('OpenStreetMap.Mapnik')); //base layer
+  map.addLayer(new  L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  maxZoom: 19,
+  attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }) );
 
   markersLayer = new L.LayerGroup();  //layer contain searched elements
   
   map.addLayer(markersLayer);
 
   var controlSearch = new L.Control.Search({
-    url: 'http://nominatim.openstreetmap.org/search?format=json&q={s}',
     position:'topright',    
     layer: markersLayer,
     initial: false,
@@ -132,9 +139,11 @@ Template.map.rendered = function() {
     map.on('dblclick', function(event) {
     console.log(event.latlng);
     try{
-      document.getElementById('locat_from_map').value= getLatLngString(event.latlng["lat"],event.latlng["lng"]);
+      Session.set('locat',getLatLngString(event.latlng["lat"],event.latlng["lng"]));
+      Modal.show('uploadModal');
+      //document.getElementById('locat_from_map').value= getLatLngString(event.latlng["lat"],event.latlng["lng"]);
     }
-    catch(err){};
+    catch(err){ throw err};
     try{
       // document.getElementById('browse-locat').value= String(event.latlng["lat"] + ',' + event.latlng["lng"]);
     }
@@ -146,12 +155,23 @@ Template.map.rendered = function() {
     jsonpParam: 'json_callback',
     propertyName: 'display_name',
     propertyLoc: ['lat','lon'],
-    marker: L.circleMarker([0,0],{radius:30}),
+    marker: false,
     autoCollapse: true,
     autoType: false,
     minLength: 2
   }) );
+
   resetMap();
+  L.easyButton('fa-refresh', function(btn, map){
+    console.log('clikkk');
+    resetMap();
+  }).addTo( map );
+
+  L.easyButton('fa-id-card', function(btn, map){
+    console.log('clikkk2');
+    Modal.show('navbarModal');
+  }).addTo( map );
+  // sidebar = L.control.sidebar('sidebar').addTo(map);
   // var query = Markers.find();
   // query.observe({
   //   added: function (document) {

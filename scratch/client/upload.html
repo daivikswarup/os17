@@ -1,48 +1,55 @@
-<template name="upload">
-<div class = "col">
-	<p> Upload panel </p>
-	{{#if TemplateVar.get "error"}}
-		<div class="row">
-			<p> Error! </p>
-		</div>
-	{{/if}}
-	 <div class="row">
-		<div class="col">
-			{{#if TemplateVar.get "uploading"}}
-	 		  	<div>
-					<div class="row">
-				      <p class="teal-text">Uploading!</p>
-				      <div class="progress">
-				        <div class="indeterminate"></div>
-				      </div>
-				    </div>
-				</div>
-			{{else}}
-				<form>
-				    <div class="row">
-				    	<div class="col">
-					        <input name="locat" type="text" class='validate locat' id='locat_from_map' placeholder="Location" value="{{locat}}" required readonly>
-					        <label for="locat" class='active'>Location</label>
-					    </div>
-					    <div class="col">
-					    	<input name="locat_title" type="text" class='validate locat_title' id='locat_title_from_map' placeholder="Location Name" value="{{locat_title}}" required>
-					        <label for="locat_title" class='active'>Location</label>
-					    </div>
-				    </div>
-				    <div class="row">
-				        <input name="topic" type="text" class='validate topic' placeholder="topic" value="{{topic}}" required>
-				        <label for="topic" class='active'>Topic</label>
-				    </div>
-				    <div class="row">
-				        <input name="image" type="file" class='validate file'  value="{{image}}" required>
-				        <label for="image" class='active'>Select image</label>
-				    </div>
-		          		<button class="btn btn-block waves-effect waves-light orange upload" type='submit'>Upload!</button>
-				  </form>
-				
+<template name="uploadModal">
+	<div class="modal fade" role="dialog" >
+	`	<div class="modal-dialog" >
+			<p> Upload panel </p>
+			{{#if TemplateVar.get "error"}}
+				<div class="modal-header">
+		          <h6 class="modal-title">Error!</h6>
+		        </div>
 			{{/if}}
+			 <div class="row">
+				<div class="col">
+					{{#if TemplateVar.get "uploading"}}
+			 		  	<div>
+							<div class="modal-header">
+					          <h6 class="modal-title">Uploading!</h6>
+						      <div class="progress">
+						        <div class="indeterminate"></div>
+						      </div>
+						    </div>
+						</div>
+					{{else}}
+						<form>
+							<div class="modal-body">
+							    <div class="row">
+							    	<div class="col">
+								        <input name="locat" type="text" class='validate locat' id='locat_from_map' placeholder="Location" value="{{locat}}" required readonly>
+								        <label for="locat" class='active'>Location</label>
+								    </div>
+								    <div class="col">
+								    	<input name="locat_title" type="text" class='validate locat_title' id='locat_title_from_map' placeholder="Location Name" value="{{locat_title}}" required>
+								        <label for="locat_title" class='active'>Location Title</label>
+								    </div>
+							    </div>
+							    <div class="row">
+							        <input name="topic" type="text" class='validate topic' placeholder="topic" value="{{topic}}" required>
+							        <label for="topic" class='active'>Topic</label>
+							    </div>
+							    <div class="row">
+							        <input name="image" type="file" class='validate file'  value="{{image}}" required>
+							        <label for="image" class='active'>Select image</label>
+							    </div>
+							</div>
+						    <div class="modal-footer">
+		          				<button class="btn btn-primary" type='submit'>Upload!</button>
+		           				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+		        			</div>
+						  </form>
+						
+					{{/if}}
+				</div>
+			 </div>
 		</div>
-	 </div>
-</div>
+	</div>
 
 </template>

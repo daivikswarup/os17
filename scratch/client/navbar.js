@@ -1,11 +1,11 @@
-Template.navbar.onRendered(function () {
+Template.navbarModal.onRendered(function () {
   this.$('.dropdown-button').dropdown({
     constrain_width: false,
     belowOrigin: true
   })
 })
 
-Template.navbar.helpers({
+Template.navbarModal.helpers({
   accounts: function () {
     return EthAccounts.find()
   },
@@ -14,9 +14,12 @@ Template.navbar.helpers({
   }
 })
 
-Template.navbar.events({
+Template.navbarModal.events({
   'click .select-account': function (e) {
     e.preventDefault()
     app.setDefaultAccount(this.address)
+  },
+  'click .closeNavModal': function (e) {
+    Modal.hide()
   }
 })

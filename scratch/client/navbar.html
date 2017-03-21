@@ -1,28 +1,34 @@
-<template name="navbar">
-  <ul id="accounts-dropdown" class="dropdown-content">
-    {{#each accounts}}
-      {{#if @index}}
-        <li class="divider"></li>
-      {{/if}}
-      <li>
-        <a class='select-account' href="#!">
-          <span class='valign-wrapper'>
-            {{shortAddress address}}
-          </span>
-        </a>
-      </li>
-    {{/each}}
-  </ul>
-  <nav class="light-blue lighten-1" role="navigation">
-    <div class="nav-wrapper">
-      <a href="/" class="brand-logo center">ethPhoto</a>
-      <ul class="right">
+<template name="navbarModal">
+  <div class="modal fade" role="dialog" >
+
+     <div class="modal-dialog" >
+     <i class="fa fa-home"></i>
+    <ul>
+      {{#each accounts}}
+        {{#if @index}}
+          <li class="divider"></li>
+        {{/if}}
         <li>
-          <a class="dropdown-button valign-wrapper" href="#!" data-activates="accounts-dropdown">
-            {{shortAddress defaultAddress}} - {{balance}} ETH
+          <a class='select-account' href="#!">
+            <span class='valign-wrapper'>
+              {{shortAddress address}}
+            </span>
           </a>
         </li>
-      </ul>
-    </div>
-  </nav>
+      {{/each}}
+    </ul>
+    <nav class="light-blue lighten-1" role="navigation">
+      <div class="nav-wrapper">
+        <ul class="right">
+          <li>
+            <a class="dropdown-button valign-wrapper" href="#!" data-activates="accounts-dropdown">
+              {{shortAddress defaultAddress}} - {{balance}} ETH
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="closeNavModal"> Close! </div>
+  </div>
+</div>
 </template>
