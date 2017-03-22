@@ -15,6 +15,11 @@ var Markers = new Meteor.Collection('markers');
 Meteor.subscribe('markers');
 
 resetMap = function(){
+  transaction = {
+                gas: 500000,
+                from: app.getDefaultAddress()
+                //from: "0x6e53e0a1f2373ba4b7d9d8fd4aeba07174830611"
+            };
         ////////////populate map with markers from sample data
   markersLayer.clearLayers();
   //   var data = [
@@ -42,40 +47,28 @@ resetMap = function(){
   //   {"loc":[41.546175,13.473590], "title":"yellow"},
   //   {"loc":[41.239190,13.032145], "title":"white"}
   // ];
-  var length = web3.eth.contract(database.abi).at(address).getNumPlaces.call();
-  for(var i =0 ; i<length; i= i + 1) {
-    var data = web3.eth.contract(database.abi).at(address).getPlaces.call(i);
-    console.log('Adding marker for ' + data);
-    var obj = JSON.parse(data);
-    var title = obj[2];  //value searched
-    var loc = [obj[0],obj[1]];    //position found
-    var marker = new L.Marker(new L.latLng(loc), {title: title} );//se property searched
-    var htmlpop = "<strong>"+title+"</strong><br><a onClick=\"loadlocation()\">Browse</a><br><a onClick=\"{Modal.show('uploadModal');}\">Upload</a>"
-    marker.bindPopup(htmlpop);
-    markersLayer.addLayer(marker);
-    marker.on('click', function(e){
-      console.log(e)
-      console.log('clicked! ',e.target.options.title);
-      var locstr = getLatLngString(e.latlng.lat,e.latlng.lng);
-      Session.set('locat',locstr);
-      Session.set('locat_title',e.target.options.title);
-      Session.set('locat_full',getLocatString(e.latlng.lat,e.latlng.lng,e.target.options.title));
-      //Modal.show('uploadModal');
-      // try{
-      //   document.getElementById('locat_from_map').value= locstr;
-      //   document.getElementById('locat_title_from_map').value= e.target.options.title;
-      // }
-      // catch(err){};
-      // try{
-      //   // jugaaad. lol.
-      //   document.getElementById('browse-locat').value= getLocatString(e.latlng.lat,e.latlng.lng,e.target.options.title);
-      // }
-      // catch(err){};
-
+  web3.eth.contract(database.abi).at(address).getNumPlaces(transaction,function(err,count){
+      for(var i =0 ; i<count; i= i + 1) {
+          web3.eth.contract(database.abi).at(address).getPlaces(i,transaction,function(err,data){
+              console.log('Adding marker for ' + data);
+              var obj = JSON.parse(data);
+              var title = obj[2];  //value searched
+              var loc = [obj[0],obj[1]];    //position found
+              var marker = new L.Marker(new L.latLng(loc), {title: title} );//se property searched
+              var htmlpop = "<strong>"+title+"</strong><br><a onClick=\"loadlocation()\">Browse</a><br><a onClick=\"{Modal.show('uploadModal');}\">Upload</a>"
+              marker.bindPopup(htmlpop);
+              markersLayer.addLayer(marker);
+              marker.on('click', function(e){
+                console.log(e)
+                console.log('clicked! ',e.target.options.title);
+                var locstr = getLatLngString(e.latlng.lat,e.latlng.lng);
+                Session.set('locat',locstr);
+                Session.set('locat_title',e.target.options.title);
+                Session.set('locat_full',getLocatString(e.latlng.lat,e.latlng.lng,e.target.options.title));
+          });
+      });
+    };
   });
-  }
-
-
 };
 
 

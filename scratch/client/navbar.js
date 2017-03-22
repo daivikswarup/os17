@@ -11,6 +11,9 @@ Template.navbarModal.helpers({
   },
   balance: function () {
     return web3.fromWei(web3.eth.getBalance(app.getDefaultAddress()).toNumber(), 'ether')
+  },
+  getAddress: function () {
+    return address;
   }
 })
 
@@ -21,5 +24,8 @@ Template.navbarModal.events({
   },
   'click .closeNavModal': function (e) {
     Modal.hide()
+  },
+  'submit': function (e) {
+    address = $('#ethereum_contract_address').value;
   }
 })

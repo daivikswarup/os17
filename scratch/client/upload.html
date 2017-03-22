@@ -1,7 +1,7 @@
 <template name="uploadModal">
 	<div class="modal fade" role="dialog" >
 	`	<div class="modal-dialog" >
-			<p> Upload panel </p>
+			<h1 class="modal-title"> Upload panel </h1>
 			{{#if TemplateVar.get "error"}}
 				<div class="modal-header">
 		          <h6 class="modal-title">Error!</h6>
@@ -19,7 +19,7 @@
 						    </div>
 						</div>
 					{{else}}
-						<form>
+						<form class = "form-horizontal">
 							<div class="modal-body">
 							    <div class="row">
 							    	<div class="col">

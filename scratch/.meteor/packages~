@@ -16,14 +16,16 @@ es5-shim@4.6.15                # ECMAScript 5 compatibility for older browsers.
 ecmascript@0.6.3              # Enable ECMAScript2015+ syntax in app code
 
 autopublish@1.0.7             # Publish all data to the clients (for prototyping)
-kadira:blaze-layout
 ethereum:web3
 ethereum:tools
 ethereum:elements
 ethereum:blocks
 frozeman:template-var
+kadira:blaze-layout
 silentcicero:solc
 showdown
+pcel:serialize
+materialize:materialize
 bevanhunt:leaflet
 stefcud:leaflet-search
 fuatsengul:leaflet-easybutton

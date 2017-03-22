@@ -10,7 +10,7 @@ Meteor.startup(function () {
   //});
   // $(window).resize();
 });
-address = "0x658b679e87aed0063b3bec5139abd6fff3e6197a";
+address = "0x096b678f2cf736a9d89bb4ebef3444accd927a32";
 import ipfs from 'ipfs-js'
 window.ipfs = ipfs
 ipfs.setProvider()
