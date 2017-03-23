@@ -1,47 +1,45 @@
 <template name="viewModal">
 	<div class="modal fade" role="dialog" >
-	`	<div class="modal-dialog" >
+	`	<div class="modal-dialog " >
 
 			<p> View </p>
-			<div class="col center">
-				<div class = "row">
-					<div class="col left">
+		 	<p id="User:" >User : {{user}}</p><br>
+		 	<p id="Topic:">Topic: {{topic}}</p><br>
+		 	<p id="Location:">Location:{{location}}</p><br>
+			<div class="container-fluid">
+				<div class = "row centered">
+					<div class="col-md-1">
 						{{#if isUser}}
-							 	<button class="prev_user">Previous By User</button>
+							 	<button class="prev_user"> <i class="fa fa-toggle-left fa-4x"></i> </button>
 						{{else}}
 							{{#if isLocation}}
-								 	<button class="prev_loc">Previous By Location</button>
+								 	<button class=" prev_loc"><i class="fa fa-toggle-left fa-4x"></i></button>
 							{{else}}
-									<button class="prev_topic">Previous By Topic</button>
+									<button class="prev_topic"><i class="fa fa-toggle-left fa-4x "></i></button>
 							{{/if}}
 						{{/if}}
 					</div>
-					<div class="col">
+					<div class="col-md-7">
 					 	<!-- Hard coded. lol. -->
-					 	<p id="User:" >User : {{user}}</p><br>
-					 	<p id="Topic:">Topic: {{topic}}</p><br>
-					 	<p id="Location:">Location:{{location}}</p><br>
-						<img src = {{url}} style="max-height:30%; max-width:30%;">
+						<img src = {{url}} class = "img-responsive centered">
 					</div>
-					<div class="col right">
+					<div class="col-md-1">
 						{{#if isUser}}
-							 	<button class="next_user">Next By User</button>
+							 	<button class="next_user"><i class="fa fa-toggle-right fa-4x "></i></button>
 						{{else}}
 							{{#if isLocation}}
-								 	<button class="next_loc">Next By Location</button>
+								 	<button class="next_loc"><i class="fa fa-toggle-right fa-4x "></i></button>
 							{{else}}
-									<button class="next_topic">Next By Topic</button>
+									<button class="next_topic"><i class="fa fa-toggle-right fa-4x "></i></button>
 							{{/if}}
 						{{/if}}
 					</div>
 				</div>
-				 <div class="row">
-				 	<button class="close">close</button>
-				 </div>
-				 <div class="row">
-				 	<button class="delete">Delete</button>
-				 </div>
 			</div>
+		</div>
+		<div class="modal-footer ">
+			<button class="btn btn-danger delete ">Delete</button>
+			<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 		</div>
 	</div>
 

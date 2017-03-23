@@ -18,6 +18,8 @@ contract database {
   }
   
   string[] public places;
+
+  string[] public topics;
   
   
   mapping(string => image)  images;
@@ -41,6 +43,17 @@ contract database {
   function getPlaces(uint256 index) constant public returns(string arr)
   {
     return(places[index]);   
+  }
+
+
+  function getNumTopics() constant public returns(uint256)
+  {
+      return(topics.length);
+  }
+    
+  function getTopics(uint256 index) constant public returns(string arr)
+  {
+    return(topics[index]);   
   }
 
   // functions with the same name as the contract get invoked on deployment
@@ -77,6 +90,8 @@ contract database {
     newImage.prev_topic_ipfs_hash = topic_images[topic];
     if(bytes(topic_images[topic]).length != 0)
       images[topic_images[topic]].next_topic_ipfs_hash = ipfshash;
+    else
+        topics.push(topic);
     topic_images[topic] = ipfshash;
     newImage.next_topic_ipfs_hash = "";
 
