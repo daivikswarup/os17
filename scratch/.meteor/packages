@@ -24,7 +24,6 @@ ethereum:tools
 ethereum:elements
 ethereum:blocks
 frozeman:template-var
-silentcicero:solc
 showdown
 bevanhunt:leaflet
 stefcud:leaflet-search
@@ -34,3 +33,4 @@ fortawesome:fontawesome
 ethereum:accounts
 frozeman:persistent-minimongo2
 ethereum:dapp-styles
+lukemadera:image-picker

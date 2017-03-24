@@ -1,11 +1,11 @@
 <template name="viewModal">
 	<div class="modal fade" role="dialog" >
-	`	<div class="modal-dialog " >
+	`	<div class="modal-dialog" >
 
 			<p> View </p>
-		 	<p id="User:" >User : {{user}}</p><br>
 		 	<p id="Topic:">Topic: {{topic}}</p><br>
 		 	<p id="Location:">Location:{{location}}</p><br>
+		 	<p id="EtherEarned:">Ether Earned:{{earned}}</p><br>
 			<div class="container-fluid">
 				<div class = "row centered">
 					<div class="col-md-1">
@@ -34,6 +34,14 @@
 							{{/if}}
 						{{/if}}
 					</div>
+				</div>
+				<div class = "row centered">
+					<form class = "form-horizontal">
+				        <input name="sendEther" type="number" class='validate sendEther bg-info' id='sendEther' placeholder="1000" value="{{sendEther}}" required >
+				        <label for="sendEther" class='active'>Send ether to uploader to show your appreciation!</label>
+						
+	           			<button class="btn btn-default sendEther" type= "submit">Send!</button>
+					</form>
 				</div>
 			</div>
 		</div>

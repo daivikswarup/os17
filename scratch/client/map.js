@@ -47,9 +47,9 @@ resetMap = function(){
   //   {"loc":[41.546175,13.473590], "title":"yellow"},
   //   {"loc":[41.239190,13.032145], "title":"white"}
   // ];
-  web3.eth.contract(database.abi).at(address).getNumPlaces(transaction,function(err,count){
+  web3.eth.contract(abi).at(address).getNumPlaces(transaction,function(err,count){
       for(var i =0 ; i<count; i= i + 1) {
-          web3.eth.contract(database.abi).at(address).getPlaces(i,transaction,function(err,data){
+          web3.eth.contract(abi).at(address).getPlaces(i,transaction,function(err,data){
               console.log('Adding marker for ' + data);
               var obj = JSON.parse(data);
               var title = obj[2];  //value searched
@@ -70,10 +70,10 @@ resetMap = function(){
     };
 
     Session.set('AllTopics',[]);
-    web3.eth.contract(database.abi).at(address).getNumTopics(transaction,function(err,count){
+    web3.eth.contract(abi).at(address).getNumTopics(transaction,function(err,count){
       if(err) throw err;
       for(var i =0 ; i<count; i= i + 1) {
-          web3.eth.contract(database.abi).at(address).getTopics(i,transaction,function(err,data){
+          web3.eth.contract(abi).at(address).getTopics(i,transaction,function(err,data){
               console.log('Adding topic for ' + data);
               a = Session.get('AllTopics');
               a.push(data);
@@ -271,6 +271,8 @@ Template.map.rendered = function() {
     console.log('clikkk2');
     Modal.show('aboutModal');
   }).addTo( map );
+  // Reload map markers and topics every 120 seconds
+  var interval = setInterval(resetMap, 120000);
   // sidebar = L.control.sidebar('sidebar').addTo(map);
   // var query = Markers.find();
   // query.observe({

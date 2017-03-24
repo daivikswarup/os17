@@ -8,7 +8,7 @@ Template.uploadModal.events({
                 from: app.getDefaultAddress()
                 //from: "0x6e53e0a1f2373ba4b7d9d8fd4aeba07174830611"
             };
-    contract = web3.eth.contract(database.abi).at(address);
+    contract = web3.eth.contract(abi).at(address);
     image = e.target.image.files[0];
     topic = e.target.topic.value;
     locat = e.target.locat.value;

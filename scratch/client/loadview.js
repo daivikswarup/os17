@@ -5,7 +5,7 @@ loadlocation = function () {
                 //from: "0x6e53e0a1f2373ba4b7d9d8fd4aeba07174830611"
             };
         //address = "0x76888bd4ac074939fae8a12ca72a786a6a31fc7a";
-        contract = web3.eth.contract(database.abi).at(address);
+        contract = web3.eth.contract(abi).at(address);
         console.log('hehrre');
         if(Session.get('locat_title') == '')
             return;
@@ -41,7 +41,7 @@ loadtopic = function () {
                 //from: "0x6e53e0a1f2373ba4b7d9d8fd4aeba07174830611"
             };
         //address = "0x76888bd4ac074939fae8a12ca72a786a6a31fc7a";
-        contract = web3.eth.contract(database.abi).at(address);
+        contract = web3.eth.contract(abi).at(address);
         console.log('hehrre');
         if(Session.get('topic') == '')
             return;
@@ -78,7 +78,7 @@ loadUser = function () {
                 //from: "0x6e53e0a1f2373ba4b7d9d8fd4aeba07174830611"
             };
         //address = "0x76888bd4ac074939fae8a12ca72a786a6a31fc7a";
-        contract = web3.eth.contract(database.abi).at(address);
+        contract = web3.eth.contract(abi).at(address);
         contract.get_user_prev('',transaction,function(err,new_hash){
                 if(err) throw err;
                 console.log(new_hash);
