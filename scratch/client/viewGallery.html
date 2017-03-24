@@ -1,0 +1,39 @@
+<template name="viewGallery">
+	<div class="modal fade" role="dialog" >
+		<div class="modal-dialog" >
+			<div class="container-fluid">
+				<div class = "row centered">
+					<div class="col-md-1">
+						{{#if isUser}}
+							 	<button class="prev_user"> <i class="fa fa-toggle-left fa-4x"></i> </button>
+						{{else}}
+							{{#if isLocation}}
+								 	<button class=" prev_loc"><i class="fa fa-toggle-left fa-4x"></i></button>
+							{{else}}
+									<button class="prev_topic"><i class="fa fa-toggle-left fa-4x "></i></button>
+							{{/if}}
+						{{/if}}
+					</div>
+					<div class="col-md-7">
+            {{#each images}}
+              <img src = {{url}} class = "img-responsive centered"><br>
+            {{/each}}
+					</div>
+					<div class="col-md-1">
+						{{#if isUser}}
+							 	<button class="next_user"><i class="fa fa-toggle-right fa-4x "></i></button>
+						{{else}}
+							{{#if isLocation}}
+								 	<button class="next_loc"><i class="fa fa-toggle-right fa-4x "></i></button>
+							{{else}}
+									<button class="next_topic"><i class="fa fa-toggle-right fa-4x "></i></button>
+							{{/if}}
+						{{/if}}
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+</template>
