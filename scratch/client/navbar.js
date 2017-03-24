@@ -60,7 +60,8 @@ Template.navbarModal.events({
           contract = web3.eth.contract(abi).at(address);
           contract.withdraw();
   },
-  'submit': function (e) {
+  'submit form': function (e) {
+    e.preventDefault();
     password = e.target.password.value;
 	account = app.getDefaultAccount().address;
 	web3.personal.unlockAccount(account, password);

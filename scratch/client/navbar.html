@@ -1,46 +1,40 @@
 <template name="navbarModal">
   <div class="modal fade" role="dialog" >
      <div class="modal-dialog container bg-info" >
-     <i class="fa fa-home"></i>
-    <ul>
-      {{#each accounts}}
-        {{#if @index}}
-          <li class="divider"></li>
-        {{/if}}
-        <li>
-          <a class='select-account' href="#!">
-            <span class='valign-wrapper'>
-              {{shortAddress address}}
-            </span>
-          </a>
-        </li>
-      {{/each}}
-    </ul>
-    <nav class="light-blue lighten-1" role="navigation">
-      <div class="nav-wrapper">
-        <ul class="right">
-          <li>
-            <a class="dropdown-button valign-wrapper" href="#!" data-activates="accounts-dropdown">
-              {{shortAddress defaultAddress}} - {{balance}} ETH
-            </a>
-          </li>
-        </ul>
+        <div class="row">
+         <h1> Available Accounts </h1><br>
+            <ul>
+              {{#each accounts}}
+                <li>
+                  <a class='select-account' href="#!">
+                    <span class='valign-wrapper'>
+                      {{shortAddress address}}
+                    </span>
+                  </a>
+                </li>
+              {{/each}}
+            </ul>
+          </div>
+          <div class="row">
+              <h2> Selected Account </h2><br>
+              <h1><a class="dropdown-button valign-wrapper" href="#!" data-activates="accounts-dropdown">
+                {{shortAddress defaultAddress}} - {{balance}} ETH
+              </a></h1>
+          </div>
+      <div id = "unlock" class="row">
+          <form>
+            <h1> Unlock account {{shortAddress defaultAddress}} </h1><br>
+            <input type="password" name = "password" id="ethereum_password" required>
+            <button class="btn btn-primary" type='submit'>Login!!</button>
+          </form>
       </div>
-    </nav>
+        <div class = "row">
+          <h1> You have earned {{dues}} ETH!</h1>
+          <button class="btn btn-default ClaimEther" type= "button">Claim!</button>
+        </div>
 
-    <button class="btn btn-default ClaimEther" type= "button">Claim!</button>
-    <div >
-      <h1> You have earned {{dues}} ETH!</h1>
-      <button class="btn btn-default ClaimEther" type= "button">Claim!</button>
-    </div>
 
-    <div id = "unlock">
-        <form>
-          <input type="text" name = "password" id="ethereum_password">
-          <button class="btn btn-primary" type='submit'>Login!!</button>
-        </form>
+      <div class="closeNavModal"> Close! </div>
     </div>
-    <div class="closeNavModal"> Close! </div>
   </div>
-</div>
 </template>
