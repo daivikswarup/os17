@@ -9,7 +9,7 @@ Template.uploadModal.events({
                 //from: "0x6e53e0a1f2373ba4b7d9d8fd4aeba07174830611"
             };
     contract = web3.eth.contract(abi).at(address);
-    image = e.target.image.files[0];
+    image = e.target.image.value;
     topic = e.target.topic.value;
     locat = e.target.locat.value;
     locat_title = e.target.locat_title.value;
@@ -18,31 +18,19 @@ Template.uploadModal.events({
     console.log(locat);
     console.log(locat_title);
     var complete_location = combineLocStr(locat,locat_title);
-    reader = new FileReader();
-    reader.onload = function(){
-            data = new Buffer( reader.result );
-            console.log(data);
-            ipfs.add(data, function(err,hash){
-                if(err){
-                    console.log("that error"); 
-                    TemplateVar.set(tmpl,'uploading',true); 
+    contract.upload(image,complete_location,topic,transaction,function(err,data){
+            if(err){ 
+                    TemplateVar.set(tmpl,'uploading', false);
+                    TemplateVar.set(tmpl,'error',true);
+                    console.log("this error");
                     throw err;}
-                console.log(hash);
-                contract.upload(hash,complete_location,topic,transaction,function(err,data){
-                        if(err){ 
-                                TemplateVar.set(tmpl,'uploading', false);
-                                TemplateVar.set(tmpl,'error',true);
-                                console.log("this error");
-                                throw err;}
-                        console.log(data);
-                        TemplateVar.set(tmpl,'error',false);
-                        TemplateVar.set(tmpl,'uploading', false)
-                        Modal.hide('uploadModal');
-                        // FlowRouter.redirect('/view/'+hash[0].hash)
-                });
-            });
-          };
-    reader.readAsArrayBuffer(image);
+            console.log(data);
+            TemplateVar.set(tmpl,'error',false);
+            TemplateVar.set(tmpl,'uploading', false)
+            Modal.hide();
+            console.log('finished');
+            // FlowRouter.redirect('/view/'+hash[0].hash)
+    });
     
     // fs.readFile(image, function(err, data) {  
     //         if (err) throw err;
@@ -52,6 +40,10 @@ Template.uploadModal.events({
     //         web3.eth.contracts(database.abi).at(address).upload(hash,location,topic,transaction);
     //     });
 
+  },
+  'click .imagepickerbutton':function(e){
+        console.log('here');
+        Modal.show('imagepicker');
   }
 });
 
@@ -61,5 +53,12 @@ Template.uploadModal.helpers({
         },
         locat_title: function(){
                 return Session.get('locat_title');
+        },
+        topic: function(){
+                return Session.get('topic');
+        },
+        UploadHash: function(){
+            return Session.get('UploadHash');
         }
-})
+
+});

@@ -1,5 +1,5 @@
 <template name="uploadModal">
-	<div class="modal fade" role="dialog" >
+	<div class="modal fade" role="dialog">
 	`	<div class="modal-dialog modal-sm container" >
 			<div class = "col">
 				<div class="row">
@@ -41,8 +41,9 @@
 								        <label for="topic" class='active'>Topic</label>
 								    </div>
 								    <div class="form-group container">
-								        <input name="image" type="file" class='validate file'  value="{{image}}" required>
-								        <label for="image" class='active'>Select image</label>
+								    	{{>imagepicker}}
+								        <input name="image" type="text" class='validate file'  value="{{UploadHash}}" readonly required>
+								        <label for="image" class='active'>IPFS Hash</label>
 								    </div>
 								</div>
 							    <div class="modal-footer">

@@ -1,7 +1,7 @@
 contract database {
 
   // public properties, available to be called
-  address public owner;
+  address owner;
   struct image{
     string ipfs_hash;
     string prev_user_ipfs_hash;
@@ -18,9 +18,9 @@ contract database {
 
   }
   
-  string[] public places;
+  string[] places;
 
-  string[] public topics;
+  string[] topics;
   
   
   mapping(address => uint) withdrawable;
@@ -72,11 +72,15 @@ contract database {
       if(bytes(images[ipfshash].ipfs_hash).length == 0)
           throw;
       address recipient = images[ipfshash].user;
-      uint appfee = msg.value/2;
-      uint recipientfee = msg.value - appfee;
-      withdrawable[recipient] += recipientfee;
+      withdrawable[recipient] += msg.value;
       images[ipfshash].total += msg.value;
   }
+
+//Send to owner
+    function ownerWithdraw() public
+    {
+        owner.transfer(address(this).balance);
+    }
 
   function withdraw() public
   {
@@ -85,10 +89,14 @@ contract database {
       withdrawable[msg.sender] = 0;
       if(!msg.sender.send(value))
       {
-          throw;
+          withdrawable[msg.sender] = value;
       }
   }
 
+  function duetome() public constant returns(uint)
+  {
+      return withdrawable[msg.sender];
+  }
 
   function upload(string ipfshash,string location,string topic) public 
   {
