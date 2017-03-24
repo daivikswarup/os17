@@ -147,6 +147,8 @@ Template.map.rendered = function() {
     map.on('dblclick', function(event) {
     console.log(event.latlng);
     try{
+      Session.set('UploadHash','');
+      Session.set('topic','');
       Session.set('locat',getLatLngString(event.latlng["lat"],event.latlng["lng"]));
       Session.set('locat_title','');
       Modal.show('uploadModal');

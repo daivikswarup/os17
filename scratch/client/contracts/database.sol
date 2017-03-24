@@ -58,7 +58,7 @@ contract database {
   }
 
   // functions with the same name as the contract get invoked on deployment
-  function database() public 
+  function database() payable public 
   {
     // set the owner address
     owner = msg.sender;
@@ -72,11 +72,15 @@ contract database {
       if(bytes(images[ipfshash].ipfs_hash).length == 0)
           throw;
       address recipient = images[ipfshash].user;
-      uint appfee = msg.value/2;
-      uint recipientfee = msg.value - appfee;
-      withdrawable[recipient] += recipientfee;
+      withdrawable[recipient] += msg.value;
       images[ipfshash].total += msg.value;
   }
+
+// //Send to owner
+//     function ownerWithdraw() public
+//     {
+//         owner.transfer(address(this).balance);
+//     }
 
   function withdraw() public
   {
@@ -89,6 +93,10 @@ contract database {
       }
   }
 
+  function duetome() public constant returns(uint)
+  {
+      return withdrawable[msg.sender];
+  }
 
   function upload(string ipfshash,string location,string topic) public 
   {
