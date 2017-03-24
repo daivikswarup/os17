@@ -1,7 +1,7 @@
 contract database {
 
   // public properties, available to be called
-  address public owner;
+  address owner;
   struct image{
     string ipfs_hash;
     string prev_user_ipfs_hash;
@@ -18,9 +18,9 @@ contract database {
 
   }
   
-  string[] public places;
+  string[] places;
 
-  string[] public topics;
+  string[] topics;
   
   
   mapping(address => uint) withdrawable;
@@ -58,7 +58,7 @@ contract database {
   }
 
   // functions with the same name as the contract get invoked on deployment
-  function database() payable public 
+  function database() public 
   {
     // set the owner address
     owner = msg.sender;
@@ -76,11 +76,11 @@ contract database {
       images[ipfshash].total += msg.value;
   }
 
-// //Send to owner
-//     function ownerWithdraw() public
-//     {
-//         owner.transfer(address(this).balance);
-//     }
+//Send to owner
+    function ownerWithdraw() public
+    {
+        owner.transfer(address(this).balance);
+    }
 
   function withdraw() public
   {
@@ -89,7 +89,7 @@ contract database {
       withdrawable[msg.sender] = 0;
       if(!msg.sender.send(value))
       {
-          throw;
+          withdrawable[msg.sender] = value;
       }
   }
 
