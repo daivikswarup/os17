@@ -27,15 +27,17 @@
         </ul>
       </div>
     </nav>
+
+    <button class="btn btn-default ClaimEther" type= "button">Claim!</button>
     <div >
       <h1> You have earned {{dues}} ETH!</h1>
       <button class="btn btn-default ClaimEther" type= "button">Claim!</button>
     </div>
-    <div id = "address">
+
+    <div id = "unlock">
         <form>
-          <input type="text" name = "add" id="ethereum_contract_address" placeholder="{{getAddress}}">
-          <label for="add" class='active'>Contract Address</label>
-          <button class="btn btn-primary" type='submit'>Go!!</button>
+          <input type="text" name = "password" id="ethereum_password">
+          <button class="btn btn-primary" type='submit'>Login!!</button>
         </form>
     </div>
     <div class="closeNavModal"> Close! </div>
