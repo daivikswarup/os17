@@ -44,6 +44,10 @@ Template.uploadModal.events({
   'click .imagepickerbutton':function(e){
         console.log('here');
         Modal.show('imagepicker');
+  },
+  'click .EnterPassword' : function(e){
+        console.log('navigating to user panel');
+        Modal.show('navbarModal');
   }
 });
 

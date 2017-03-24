@@ -1,6 +1,6 @@
 <template name="uploadModal">
 	<div class="modal fade" role="dialog">
-	`	<div class="modal-dialog modal-sm container" >
+	`	<div class="modal-dialog modal-sm container bg-info" >
 			<div class = "col">
 				<div class="row">
 					<h1 class="modal-title"> Upload panel </h1>
@@ -8,7 +8,7 @@
 				<div class="row">
 					{{#if TemplateVar.get "error"}}
 						<div class="modal-header">
-				          <h6 class="modal-title">Error! Unlock Account</h6>
+				          <h6 class="modal-title">Error! <a class="EnterPassword" > Unlock Account </a></h6>
 				        </div>
 					{{/if}}
 				</div>

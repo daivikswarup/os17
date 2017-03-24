@@ -1,6 +1,6 @@
 <template name="viewModal">
 	<div class="modal fade" role="dialog" >
-	`	<div class="modal-dialog" >
+	`	<div class="modal-dialog container modal-m bg-info" >
 
 			<p> View </p>
 		 	<p id="Topic:">Topic: {{topic}}</p><br>
@@ -21,7 +21,7 @@
 					</div>
 					<div class="col-md-7">
 					 	<!-- Hard coded. lol. -->
-						<img src = {{url}} class = "img-responsive centered">
+						<img src = {{url}} class = "img-responsive centered" data-action="zoom">
 					</div>
 					<div class="col-md-1">
 						{{#if isUser}}

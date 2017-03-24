@@ -2,7 +2,7 @@
   <div class="modal fade" role="dialog" >
      <div class="modal-dialog container bg-info" >
         <div class="row">
-         <h1> Available Accounts </h1><br>
+         <h3> Available Accounts </h3><br>
             <ul>
               {{#each accounts}}
                 <li>
@@ -16,25 +16,26 @@
             </ul>
           </div>
           <div class="row">
-              <h2> Selected Account </h2><br>
-              <h1><a class="dropdown-button valign-wrapper" href="#!" data-activates="accounts-dropdown">
-                {{shortAddress defaultAddress}} - {{balance}} ETH
-              </a></h1>
+              <h5> Selected Account : {{shortAddress defaultAddress}} </h5>
+              <h5> Ether Balance : {{balance}} ETH </h5>
           </div>
       <div id = "unlock" class="row">
           <form>
-            <h1> Unlock account {{shortAddress defaultAddress}} </h1><br>
-            <input type="password" name = "password" id="ethereum_password" required>
+            <h3> Unlock account {{shortAddress defaultAddress}} </h3>
+            <input type="password" name = "password" id="ethereum_password" placeholder="Password" required>
             <button class="btn btn-primary" type='submit'>Login!!</button>
           </form>
       </div>
         <div class = "row">
-          <h1> You have earned {{dues}} ETH!</h1>
-          <button class="btn btn-default ClaimEther" type= "button">Claim!</button>
+          {{#if dues != 0}}
+            <h1> You have earned {{dues}} ETH!!!</h1>
+            <button class="btn btn-default ClaimEther" type= "button">Claim!</button>
+          {{/if}}
         </div>
 
-
-      <div class="closeNavModal"> Close! </div>
+        <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        </div>
     </div>
   </div>
 </template>
