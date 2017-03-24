@@ -37,6 +37,8 @@ Template.navbarModal.events({
           contract.withdraw();
   },
   'submit': function (e) {
-    address = $('#ethereum_contract_address').value;
+    password = e.target.password.value;
+	account = app.getDefaultAccount().address;
+	web3.personal.unlockAccount(account, password);
   }
 })
