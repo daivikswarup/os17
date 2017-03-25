@@ -227,8 +227,16 @@ Template.viewModal.events({
 			            };
 			    	//address = "0x790311f15df00207c3f32d3586e73790db613167";
 					contract = web3.eth.contract(abi).at(address);
-					contract.delete_image(Session.get('hash'),transaction);
-                    Modal.hide();
+					try{
+                        contract.delete_image(Session.get('hash'),transaction);
+                        Modal.hide();
+                        $('.closemodal').click();
+                    }
+                    catch(e){
+                        console.log(e)
+                        alert('Unlock required');
+                        Modal.show('navbarModal');
+                    }
     				//FlowRouter.redirect('/');
     }
 });

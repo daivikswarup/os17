@@ -28,6 +28,7 @@ Template.uploadModal.events({
             TemplateVar.set(tmpl,'error',false);
             TemplateVar.set(tmpl,'uploading', false)
             Modal.hide();
+            $('.closemodal').click();
             console.log('finished');
             // FlowRouter.redirect('/view/'+hash[0].hash)
     });
@@ -47,6 +48,7 @@ Template.uploadModal.events({
   },
   'click .EnterPassword' : function(e){
         console.log('navigating to user panel');
+        TemplateVar.set("error",false);
         Modal.show('navbarModal');
   }
 });

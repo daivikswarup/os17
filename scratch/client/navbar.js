@@ -37,6 +37,9 @@ Template.navbarModal.helpers({
   },
   dues: function(){
     return Session.get('DueToMe');
+  },
+  isdefault: function(address){
+    return (app.getDefaultAccount().address == this.address);
   }
 })
 
@@ -63,7 +66,13 @@ Template.navbarModal.events({
   'submit form': function (e) {
     e.preventDefault();
     password = e.target.password.value;
-	account = app.getDefaultAccount().address;
-	web3.personal.unlockAccount(account, password);
+  	account = app.getDefaultAccount().address;
+  	try{
+          web3.personal.unlockAccount(account, password);
+          Modal.hide();
+        }
+      catch(e){
+          alert('Incorrect details');
+      }
   }
 })

@@ -1,5 +1,5 @@
 // libs
-//@import '{ethereum:dapp-styles}/dapp-styles.less';
+@import '{ethereum:dapp-styles}/dapp-styles.less';
 // For the map
 html, body {
   margin: 0;
@@ -9,5 +9,46 @@ html, body {
 
   #map {
     height: 100vh;
-    width: 100vx;
+    width: 100vw;
   }
+
+.camera-popup {
+  position: fixed;
+  z-index: 6000;}
+
+.camera-overlay {
+	  z-index: 5999;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+
+  background: rgba(0, 0, 0, 0.4);
+}
+
+
+
+.modal-dialog {
+    padding: 20px;
+    border: 1px solid #f0f0f0;
+    border-bottom: 2px solid #ccc;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    background:rgba(255,255,255,0.8);
+
+}
+
+.zoom-img-wrap {
+	z-index: 9000;
+	position:'relative';
+
+}
+
+.zoom-overlay{
+	z-index: 8999;
+	position:'relative';
+}

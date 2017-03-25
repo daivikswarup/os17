@@ -2,10 +2,18 @@
 	<div class="modal fade" role="dialog" >
 	`	<div class="modal-dialog container modal-m bg-info" >
 
-			<p> View </p>
-		 	<p id="Topic:">Topic: {{topic}}</p><br>
+			<h1> View </h1>
+			<dl class="dl-horizontal">
+			  <dt>Topic</dt>
+			  <dd>{{topic}}</dd>
+			  <dt>Location</dt>
+			  <dd>{{location}}</dd>
+			  <dt>Eather Earned</dt>
+			  <dd>{{earned}}</dd>
+			</dl><br>
+		 	<!-- <p id="Topic:">Topic: {{topic}}</p><br>
 		 	<p id="Location:">Location:{{location}}</p><br>
-		 	<p id="EtherEarned:">Ether Earned:{{earned}}</p><br>
+		 	<p id="EtherEarned:">Ether Earned:{{earned}}</p><br> -->
 			<div class="container-fluid">
 				<div class = "row centered">
 					<div class="col-md-1">
@@ -44,10 +52,11 @@
 					</form>
 				</div>
 			</div>
-		</div>
-		<div class="modal-footer ">
-			<button class="btn btn-danger delete ">Delete</button>
-			<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+
+			<div class="modal-footer ">
+				<button class="btn btn-danger delete ">Delete</button>
+				<button type="button" class="btn btn-default closemodal" data-dismiss="modal">Cancel</button>
+			</div>
 		</div>
 	</div>
 
