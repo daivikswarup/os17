@@ -1,60 +1,33 @@
 <template name="viewModal">
 	<div class="modal fade " role="dialog" >
-	`	<div class="modal-dialog container modal-m bg-info" >
+	`	<div class="modal-dialog container modal-l bg-info" >
 
 			<h1> View </h1>
-			<dl class="dl-horizontal">
-			  <dt>Topic</dt>
-			  <dd>{{topic}}</dd>
-			  <dt>Location</dt>
-			  <dd>{{location}}</dd>
-			  <dt>Eather Earned</dt>
-			  <dd>{{earned}}</dd>
-			</dl><br>
 		 	<!-- <p id="Topic:">Topic: {{topic}}</p><br>
 		 	<p id="Location:">Location:{{location}}</p><br>
 		 	<p id="EtherEarned:">Ether Earned:{{earned}}</p><br> -->
 			<div class="container-fluid">
-				<div class = "row centered">
-					<div class="col-md-1">
+					<div id="links">
+						{{#each images}}
+							<a href="{{getURL}}" class = "galleryImage" location='{{getLocat}}' topic='{{getTopic}}' etherEarned='{{getEther}}' hash='{{hash}}'>
+								<img src="{{getURL}}" height = 50px width=50px >
+							</a>
+						{{/each}}
+					</div>
+					<div class="row">
 						{{#if isUser}}
-							 	<button class="prev_user"> <i class="fa fa-toggle-left fa-4x"></i> </button>
+							 	<button class="load_user btn-success">Load more!</button>
 						{{else}}
 							{{#if isLocation}}
-								 	<button class=" prev_loc"><i class="fa fa-toggle-left fa-4x"></i></button>
+								 	<button class="load_loc btn-success">Load more!</button>
 							{{else}}
-									<button class="prev_topic"><i class="fa fa-toggle-left fa-4x "></i></button>
+									<button class="load_topic btn-success">Load more!</button>
 							{{/if}}
 						{{/if}}
 					</div>
-					<div class="col-md-7">
-					 	<!-- Hard coded. lol. -->
-						<img src = {{url}} class = "img-responsive centered" data-action="zoom">
-					</div>
-					<div class="col-md-1">
-						{{#if isUser}}
-							 	<button class="next_user"><i class="fa fa-toggle-right fa-4x "></i></button>
-						{{else}}
-							{{#if isLocation}}
-								 	<button class="next_loc"><i class="fa fa-toggle-right fa-4x "></i></button>
-							{{else}}
-									<button class="next_topic"><i class="fa fa-toggle-right fa-4x "></i></button>
-							{{/if}}
-						{{/if}}
-					</div>
-				</div>
-				<div class = "row centered">
-					<form class = "form-horizontal">
-				        <input name="sendEther" type="number" class='validate sendEther bg-info' id='sendEther' placeholder="1000" value="{{sendEther}}" required >
-				        <label for="sendEther" class='active'>Send ether to uploader to show your appreciation!</label>
-						
-	           			<button class="btn btn-success sendEther " type= "submit">Send!</button>
-					</form>
-				</div>
 			</div>
 
 			<div class="modal-footer">
-				<button class="btn btn-danger delete ">Delete</button>
 				<button type="button" class="btn btn-default closemodal " data-dismiss="modal">Cancel</button>
 			</div>
 		</div>

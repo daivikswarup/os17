@@ -1,0 +1,26 @@
+<template name="gallery">
+		 	<div id="blueimp-gallery" class="blueimp-gallery">
+			    <div class="slides"></div>
+			    <div class="interact-contract title">
+				    <dl class="dl-horizontal">
+						  <dt>Topic</dt>
+						  <dd class='topic'></dd>
+						  <dt>Location</dt>
+						  <dd class='location'></dd>
+						  <dt>Eather Earned</dt>
+						  <dd class='etherEarned'></dd>
+					</dl>
+					<form class = "form-horizontal">
+				        <input name="sendEther" type="number" class='validate sendEther bg-info' id='sendEther' placeholder="1000" required >
+				        <label for="sendEther" class='active'>Send ether to uploader to show your appreciation!</label>
+						
+	           			<button class="btn btn-default sendEther" type= "submit">Send!</button>
+					</form>
+				</div>
+			    <a class="prev">‹</a>
+			    <a class="next">›</a>
+			    <a class="close">×</a>
+			    <a class="play-pause"></a>
+			    <ol class="indicator"></ol>
+			</div>
+</template>
