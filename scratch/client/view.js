@@ -66,12 +66,12 @@ Template.viewModal.events({
     'click .load_loc': function(e){
         e.preventDefault();
         arr = Session.get('albumImages');
-        populateAlbumTopic(arr[arr.length-1].hash,Session.get('locat_string'),10);
+        populateAlbumLocatiob(arr[arr.length-1].hash,Session.get('locat_string'),10);
     },
     'click .load_topic': function(e){
         e.preventDefault();
         arr = Session.get('albumImages');
-        populateAlbumLocatiob(arr[arr.length-1].hash,Session.get('topic'),10);
+        populateAlbumTopic(arr[arr.length-1].hash,Session.get('topic'),10);
     },
     'click .load_user': function(e){
         e.preventDefault();
