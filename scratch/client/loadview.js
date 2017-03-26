@@ -1,5 +1,6 @@
 loadlocation = function () {
     Session.set('albumImages',[]);
+    Session.set('autoSort',true);
     populateAlbumLocation(Session.get('locat_full'),'',10);
     Session.set('viewType','location');
     Modal.show('viewModal');
@@ -9,6 +10,7 @@ loadlocation = function () {
 
 loadtopic = function () {
     Session.set('albumImages',[]);
+    Session.set('autoSort',true);
     populateAlbumTopic(Session.get('topic'),'',10);
     Session.set('viewType','topic');
     Modal.show('viewModal');
@@ -18,6 +20,7 @@ loadtopic = function () {
 
 loadUser = function () {
     Session.set('albumImages',[]);
+    Session.set('autoSort',true);
     populateAlbumUser('',10);
     Session.set('viewType','user');
     Modal.show('viewModal');
@@ -39,6 +42,7 @@ loadUser = function () {
                 if(new_hash!="")
                 {
                     //count = count - 1;
+                    Session.set('latestHash',new_hash);
                     arr = Session.get('albumImages');
                     var data = contract.get_metadata(new_hash);
                     arr.push({'hash':new_hash,'ether':data[2].c[0],'topic':data[0],'location':data[1]});
@@ -48,10 +52,17 @@ loadUser = function () {
                         populateAlbumUser(new_hash,count-1);
                         return;
                     }
+                    else{
+                        if(Session.get('autoSort'))
+                            Session.set('albumImages',Session.get('albumImages').sort(function(a,b){return(b.ether-a.ether);}));
+                    }
 
                 }
-                else
+                else{
+                    if(Session.get('autoSort'))
+                        Session.set('albumImages',Session.get('albumImages').sort(function(a,b){return(b.ether-a.ether);}));
                     console.log('End of list');
+                }
             });
   };
 
@@ -69,6 +80,7 @@ loadUser = function () {
                 if(new_hash!="")
                 {
                     //count = count - 1;
+                    Session.set('latestHash',new_hash);
                     arr = Session.get('albumImages');
                     var data = contract.get_metadata(new_hash);
                     arr.push({'hash':new_hash,'ether':data[2].c[0],'topic':data[0],'location':data[1]});
@@ -78,10 +90,17 @@ loadUser = function () {
                         populateAlbumLocation(location,new_hash,count-1);
                         return;
                     }
+                    else{
+                        if(Session.get('autoSort'))
+                            Session.set('albumImages',Session.get('albumImages').sort(function(a,b){return(b.ether-a.ether);}));
+                    }
 
                 }
-                else
+                else{
+                    if(Session.get('autoSort'))
+                        Session.set('albumImages',Session.get('albumImages').sort(function(a,b){return(b.ether-a.ether);}));
                     console.log('End of list');
+                }
             });
   };
 
@@ -100,6 +119,7 @@ loadUser = function () {
                 if(new_hash!="")
                 {
                     //count = count - 1;
+                    Session.set('latestHash',new_hash);
                     arr = Session.get('albumImages');
                     var data = contract.get_metadata(new_hash);
                     arr.push({'hash':new_hash,'ether':data[2].c[0],'topic':data[0],'location':data[1]});
@@ -109,9 +129,16 @@ loadUser = function () {
                         populateAlbumTopic(topic,new_hash,count-1);
                         return;
                     }
+                    else{
+                        if(Session.get('autoSort'))
+                            Session.set('albumImages',Session.get('albumImages').sort(function(a,b){return(b.ether-a.ether);}));
+                    }
 
                 }
-                else
+                else{
+                    if(Session.get('autoSort'))
+                        Session.set('albumImages',Session.get('albumImages').sort(function(a,b){return(b.ether-a.ether);}));
                     console.log('End of list');
+                }
             });
   };

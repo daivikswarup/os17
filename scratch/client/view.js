@@ -63,45 +63,30 @@ Template.viewModal.helpers({
 // })
 
 Template.viewModal.events({
+    'change #autoSort': function() {
+        if (document.getElementById('autoSort').checked)
+        {
+          Session.set('autoSort', true);
+          Session.set('albumImages',Session.get('albumImages').sort(function(a,b){return(b.ether-a.ether);}));
+        }
+        else
+          Session.set('autoSort', false);
+    },
     'click .load_loc': function(e){
         e.preventDefault();
-        arr = Session.get('albumImages');
-        populateAlbumLocatiob(arr[arr.length-1].hash,Session.get('locat_string'),10);
+        populateAlbumLocation(Session.get('latestHash'),Session.get('locat_string'),10);
     },
     'click .load_topic': function(e){
         e.preventDefault();
-        arr = Session.get('albumImages');
-        populateAlbumTopic(arr[arr.length-1].hash,Session.get('topic'),10);
+        populateAlbumTopic(Session.get('latestHash'),Session.get('topic'),10);
     },
     'click .load_user': function(e){
         e.preventDefault();
-        arr = Session.get('albumImages');
-        populateAlbumUser(arr[arr.length-1].hash,10);
+        populateAlbumUser(Session.get('latestHash'),10);
     },
     'click .close': function(e){
                     e.preventDefault();
                     Modal.hide();
-    				//FlowRouter.redirect('/');
-    },
-    'click .delete': function(e){
-                    e.preventDefault();
-    				transaction = {
-			                gas: 500000,
-			                from: app.getDefaultAddress()
-			                //from: "0x6e53e0a1f2373ba4b7d9d8fd4aeba07174830611"
-			            };
-			    	//address = "0x790311f15df00207c3f32d3586e73790db613167";
-					contract = web3.eth.contract(abi).at(address);
-					try{
-                        contract.delete_image(Session.get('hash'),transaction);
-                        Modal.hide();
-                        $('.closemodal').click();
-                    }
-                    catch(e){
-                        console.log(e)
-                        alert('Unlock required');
-                        Modal.show('navbarModal');
-                    }
     				//FlowRouter.redirect('/');
     },
     'click #links' : function (event) {
