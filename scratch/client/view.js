@@ -214,8 +214,14 @@ Template.viewModal.events({
                             value: value
                             //from: "0x6e53e0a1f2373ba4b7d9d8fd4aeba07174830611"
                         };
-                    contract.like(Session.get('hash'),transaction);
-                    e.target.sendEther.value = 0;
+                    try{
+                            contract.like(Session.get('hash'),transaction);
+                            e.target.sendEther.value = 0;
+                    }
+                    catch(e){
+                        alert('Insufficient funds / Locked Account');
+                        Modal.show('navbarModal');
+                    }
                     //FlowRouter.redirect('/');
     },
     'click .delete': function(e){

@@ -34,5 +34,4 @@ ethereum:accounts
 frozeman:persistent-minimongo2
 ethereum:dapp-styles
 mdg:camera
-inno:zoom
 less

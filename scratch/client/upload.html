@@ -1,16 +1,16 @@
 <template name="uploadModal">
-	 <div class="modal fade" role="dialog" >
-	     <div class="modal-dialog modal-m container" >
+	 <div class="modal fade " role="dialog" >
+	     <div class="modal-dialog modal-sm container " >
 	        		<div class="row">
 						<h1 class="modal-title"> Upload panel </h1>
 					</div>
-					<div class="row">
-						{{#if TemplateVar.get "error"}}
+					{{#if TemplateVar.get "error"}}
+						<div class="row">
 							<div class="modal-header">
 					          <h6 class="modal-title">Error! <a class="EnterPassword" > Unlock Account </a></h6>
 					        </div>
-						{{/if}}
-					</div>
+						</div>
+					{{/if}}
 					 <div class="row">
 						<div class="col">
 							{{#if TemplateVar.get "uploading"}}
@@ -42,8 +42,8 @@
 									    </div>
 
 									    <div class="container form-group" >
-							  				<button class="btn btn-primary" type='submit'>Upload!</button>
-							   				<button type="button" class="btn btn-default closemodal" data-dismiss="modal">Cancel</button>
+							  				<button class="btn btn-primary dapp-tag-button" type='submit'>Upload!</button>
+							   				<button type="button" class="btn btn-default closemodal dapp-tag-button bg-danger" data-dismiss="modal">Cancel</button>
 										</div>
 
 									</div>
