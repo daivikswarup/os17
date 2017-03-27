@@ -8,6 +8,9 @@
 		 	<p id="EtherEarned:">Ether Earned:{{earned}}</p><br> -->
 		 	<input type="checkbox" id="autoSort" value={{autoSort}}>
 		 	Autosort.
+		 	{{#if isLocation}}
+		 		<button type="button" class="btn btn-success uploadView " >upload</button>
+		 	{{/if}}
 			<div class="container-fluid">
 					<div id="links">
 						{{#each images}}

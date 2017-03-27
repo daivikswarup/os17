@@ -1,4 +1,5 @@
 loadlocation = function () {
+    Session.set('latestHash',"");
     Session.set('albumImages',[]);
     Session.set('autoSort',false);
     populateAlbumLocation(Session.get('locat_full'),'',10);
@@ -9,6 +10,7 @@ loadlocation = function () {
 
 
 loadtopic = function () {
+    Session.set('latestHash',"");
     Session.set('albumImages',[]);
     Session.set('autoSort',false);
     populateAlbumTopic(Session.get('topic'),'',10);
@@ -19,6 +21,7 @@ loadtopic = function () {
 
 
 loadUser = function () {
+    Session.set('latestHash',"");
     Session.set('albumImages',[]);
     Session.set('autoSort',false);
     populateAlbumUser('',10);

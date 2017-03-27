@@ -13,7 +13,7 @@ fetchdues = function(){
           console.log(result);
           console.log('here');
                 //Session.set('View-user',result[2]);
-          Session.set('DueToMe',result.c[0]);
+          Session.set('DueToMe',result.c[0]/10000);
       });
 }
 
@@ -38,6 +38,9 @@ Template.navbarModal.helpers({
   },
   dues: function(){
     return Session.get('DueToMe');
+  },
+  dueszero:function(){
+    return Session.get('DueToMe') != 0;
   },
   isdefault: function(address){
     return (app.getDefaultAccount().address == this.address);

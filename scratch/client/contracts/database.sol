@@ -25,7 +25,6 @@ contract database {
   
   mapping(address => uint) withdrawable;
 
-
   mapping(string => image)  images;
 
   mapping(address => string)  user_images;
@@ -72,7 +71,8 @@ contract database {
       if(bytes(images[ipfshash].ipfs_hash).length == 0)
           throw;
       address recipient = images[ipfshash].user;
-      withdrawable[recipient] += msg.value;
+      uint userCut = msg.value/2;
+      withdrawable[recipient] += userCut;
       images[ipfshash].total += msg.value;
   }
 
@@ -158,28 +158,6 @@ contract database {
     if( bytes(hash).length == 0)
       return location_images[location];
     return images[hash].prev_location_ipfs_hash;
-  }
-
-  // Get next image in list
-  function get_topic_next(string topic,string hash) constant public returns (string)
-  {
-    if( bytes(hash).length == 0)
-      return topic_images[topic];
-    return images[hash].next_topic_ipfs_hash;
-  }
-
-  function get_user_next(string hash) constant public returns (string)
-  {
-    if( bytes(hash).length == 0)
-      return user_images[msg.sender];
-    return images[hash].next_user_ipfs_hash;
-  }
-
-  function get_location_next(string location,string hash) constant public returns (string)
-  {
-    if( bytes(hash).length == 0)
-      return location_images[location];
-    return images[hash].next_location_ipfs_hash;
   }
 
   

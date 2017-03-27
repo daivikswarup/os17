@@ -10,16 +10,7 @@
 						  <dt>Eather Earned</dt>
 						  <dd class='etherEarned'></dd>
 					</dl>
-					{{#if sending}}
-						<h1> Sending... </h1>
-					{{else}}
-						<form class = "form-horizontal">
-					        <input name="sendEther" type="number" class='validate sendEther bg-info' id='sendEther' placeholder="1000" required >
-					        <label for="sendEther" class='active'>Send ether to uploader to show your appreciation!</label>
-							
-		           			<button class="btn btn-success sendEther" type= "submit">Send!</button>
-						</form>
-					{{/if}}
+					{{>send}}
 					<button class="btn btn-danger delete" type= "button">Delete</button>
 				</div>
 			    <a class="prev"><i class="fa fa-arrow-circle-left"></i></a>

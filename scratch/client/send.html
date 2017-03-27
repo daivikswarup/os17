@@ -1,0 +1,17 @@
+<template name="send">
+	{{#if sending}}
+						<h1> Sending... </h1>
+					{{else}}
+						<div class="buttons">
+							{{#each denom}}
+								<button class="btn btn-default valueButton" value = {{value}}>{{value}}</button>
+							{{/each}}
+						</div>
+						<form class = "form-horizontal">
+					        <input name="sendEther" type="number" class='validate sendEther bg-info' id='sendEther' placeholder="1000" required >
+					        <label for="sendEther" class='active'>Send ether to uploader to show your appreciation!</label>
+							
+		           			<button class="btn btn-success sendEther" type= "submit">Send!</button>
+						</form>
+	{{/if}}
+</template>

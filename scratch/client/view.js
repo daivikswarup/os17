@@ -35,7 +35,7 @@ Template.viewModal.helpers({
         return this.topic;
     },
     getEther: function() {
-        return this.ether;
+        return Number(this.ether)/10000;
     },
     getLocat: function () {
         return this.location; 
@@ -91,6 +91,11 @@ Template.viewModal.events({
                     e.preventDefault();
                     Modal.hide();
     				//FlowRouter.redirect('/');
+    },
+    'click .uploadView': function(e){
+                    e.preventDefault();
+                    Modal.show('uploadModal');
+                    //FlowRouter.redirect('/');
     },
     'click #links' : function (event) {
         event = event || window.event;
