@@ -71,10 +71,17 @@ Template.uploadModal.helpers({
         },
         UploadHash: function(){
             return Session.get('UploadHash');
+        },
+        getTopics:function(){
+            console.log('herefasf');
+            return Session.get('AllTopics');
         }
 
 });
 
-Template.uploadModal.onCreated(function(e){
+Template.uploadModal.onRendered(function(e){
     Session.set('UploadHash',"");
-})
+    var input = document.getElementById("selectTopic");
+    console.log(Session.get('AllTopics'));
+    new Awesomplete(input,{list:Session.get('AllTopics')});
+});
