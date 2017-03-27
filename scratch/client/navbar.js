@@ -18,6 +18,7 @@ fetchdues = function(){
 }
 
 Template.navbarModal.onRendered(function () {
+  Session.set('unlocking',false);
   this.$('.dropdown-button').dropdown({
     constrain_width: false,
     belowOrigin: true
@@ -40,6 +41,12 @@ Template.navbarModal.helpers({
   },
   isdefault: function(address){
     return (app.getDefaultAccount().address == this.address);
+  },
+  claimClicked: function(){
+    return Session.get('claimClicked');
+  },
+  unlocking: function(){
+    return Session.get('unlocking');
   }
 })
 
@@ -61,15 +68,31 @@ Template.navbarModal.events({
                   };
             //address = "0x790311f15df00207c3f32d3586e73790db613167";
           contract = web3.eth.contract(abi).at(address);
-          contract.withdraw();
+          Session.set('claimClicked',true);
+          contract.withdraw(transaction,function(err){
+              if(err){
+                Session.set('claimClicked',false);
+                alert('Please login first');
+              }
+          });
   },
   'submit form': function (e) {
     e.preventDefault();
     password = e.target.password.value;
   	account = app.getDefaultAccount().address;
   	try{
-          web3.personal.unlockAccount(account, password);
-          Modal.hide();
+          Session.set('unlocking',true);
+          web3.personal.unlockAccount(account, password,function(err){
+                  if(err){
+                    alert('Incorrect password');
+                    Session.set('unlocking',false);
+                  }
+                  else
+                  {
+                    Session.set('unlocking',false);
+                    Modal.hide();
+                  }
+          });
         }
       catch(e){
           alert('Incorrect details');

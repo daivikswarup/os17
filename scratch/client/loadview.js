@@ -1,6 +1,6 @@
 loadlocation = function () {
     Session.set('albumImages',[]);
-    Session.set('autoSort',true);
+    Session.set('autoSort',false);
     populateAlbumLocation(Session.get('locat_full'),'',10);
     Session.set('viewType','location');
     Modal.show('viewModal');
@@ -10,7 +10,7 @@ loadlocation = function () {
 
 loadtopic = function () {
     Session.set('albumImages',[]);
-    Session.set('autoSort',true);
+    Session.set('autoSort',false);
     populateAlbumTopic(Session.get('topic'),'',10);
     Session.set('viewType','topic');
     Modal.show('viewModal');
@@ -20,7 +20,7 @@ loadtopic = function () {
 
 loadUser = function () {
     Session.set('albumImages',[]);
-    Session.set('autoSort',true);
+    Session.set('autoSort',false);
     populateAlbumUser('',10);
     Session.set('viewType','user');
     Modal.show('viewModal');
@@ -53,14 +53,17 @@ loadUser = function () {
                         return;
                     }
                     else{
-                        if(Session.get('autoSort'))
+                        if(Session.get('autoSort') == true)
+                            console.log('sorting');
                             Session.set('albumImages',Session.get('albumImages').sort(function(a,b){return(b.ether-a.ether);}));
                     }
 
                 }
                 else{
-                    if(Session.get('autoSort'))
+                    if(Session.get('autoSort')){
+                        console.log('sorting');
                         Session.set('albumImages',Session.get('albumImages').sort(function(a,b){return(b.ether-a.ether);}));
+                    }
                     console.log('End of list');
                 }
             });
@@ -91,14 +94,18 @@ loadUser = function () {
                         return;
                     }
                     else{
-                        if(Session.get('autoSort'))
+                        if(Session.get('autoSort')){
+                            console.log('sorting');
                             Session.set('albumImages',Session.get('albumImages').sort(function(a,b){return(b.ether-a.ether);}));
+                        }
                     }
 
                 }
                 else{
-                    if(Session.get('autoSort'))
+                    if(Session.get('autoSort')){
+                        console.log('sorting');
                         Session.set('albumImages',Session.get('albumImages').sort(function(a,b){return(b.ether-a.ether);}));
+                    }
                     console.log('End of list');
                 }
             });
@@ -130,14 +137,18 @@ loadUser = function () {
                         return;
                     }
                     else{
-                        if(Session.get('autoSort'))
+                        if(Session.get('autoSort')){
+                            console.log('sorting');
                             Session.set('albumImages',Session.get('albumImages').sort(function(a,b){return(b.ether-a.ether);}));
+                        }
                     }
 
                 }
                 else{
-                    if(Session.get('autoSort'))
+                    if(Session.get('autoSort')){
+                        console.log('sorting');
                         Session.set('albumImages',Session.get('albumImages').sort(function(a,b){return(b.ether-a.ether);}));
+                    }
                     console.log('End of list');
                 }
             });

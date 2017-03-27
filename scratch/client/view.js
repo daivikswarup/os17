@@ -53,6 +53,9 @@ Template.viewModal.helpers({
     },
     images:function(){
         return Session.get('albumImages');
+    },
+    autoSort:function(){
+        return Session.get('autoSort');
     }
 
 });

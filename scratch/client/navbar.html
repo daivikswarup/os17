@@ -35,13 +35,18 @@
               {{/each}}
             </ul> -->
           </div>
-          <div id = "unlock" class="row ">
-              <form>
-                <h3> Unlock account {{shortAddress defaultAddress}} </h3>
-                <input type="password" name = "password" id="ethereum_password" placeholder="Password" required>
-                <button class="btn btn-primary dapp-tag-button" type='submit'>Unlock!!</button>
-              </form>
-          </div>
+          {{#if unlocking}}
+            <h1> Unlocking!! Please wait. </h1>
+            
+          {{else}}
+            <div id = "unlock" class="row ">
+                <form>
+                  <h3> Unlock account {{shortAddress defaultAddress}} </h3>
+                  <input type="password" name = "password" id="ethereum_password" placeholder="Password" required>
+                  <button class="btn btn-primary dapp-tag-button" type='submit'>Unlock!!</button>
+                </form>
+            </div>
+          {{/if}}
           <div class="row">
               <h5> Selected Account : {{shortAddress defaultAddress}} </h5>
               <h5> Ether Balance : {{balance}} ETH </h5>
@@ -49,8 +54,12 @@
       
         <div class = "row ">
           {{#if dues != 0}}
-            <h1> You have earned {{dues}} ETH!!!</h1>
-            <button class="btn btn-success ClaimEther dapp-tag-button greenbutton" type= "button">Claim!</button>
+            {{#if claimClicked}}
+                <h1> Your claim will be processed shortly </h1>
+            {{else}}
+                <h1> You have earned {{dues}} ETH!!!</h1>
+                <button class="btn btn-success ClaimEther dapp-tag-button greenbutton" type= "button">Claim!</button>
+            {{/if}}
           {{/if}}
         </div>
 

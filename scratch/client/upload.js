@@ -2,7 +2,7 @@ Template.uploadModal.events({
   'submit form': function (e, tmpl) {
     // address = "0x790311f15df00207c3f32d3586e73790db613167";
     e.preventDefault();
-    TemplateVar.set('uploading', true)
+    TemplateVar.set('uploading', true);
     transaction = {
                 gas: 2000000,
                 from: app.getDefaultAddress()
@@ -10,6 +10,12 @@ Template.uploadModal.events({
             };
     contract = web3.eth.contract(abi).at(address);
     image = e.target.image.value;
+    if(image.length != 46){
+        console.log(image.length);
+        alert('Invalid hash');
+        TemplateVar.set('uploading', false);
+        return;
+    }
     topic = e.target.topic.value;
     locat = e.target.locat.value;
     locat_title = e.target.locat_title.value;
@@ -68,3 +74,7 @@ Template.uploadModal.helpers({
         }
 
 });
+
+Template.uploadModal.onCreated(function(e){
+    Session.set('UploadHash',"");
+})

@@ -11,7 +11,11 @@ Template.gallery.events({
                             //from: "0x6e53e0a1f2373ba4b7d9d8fd4aeba07174830611"
                         };
                     try{
-                            contract.like(Session.get('hash'),transaction);
+                            Session.set('sending',true);
+                            contract.like(Session.get('hash'),transaction,function(err){
+                                    Session.set('sending',false);
+                                    if(err) throw err;
+                            });
                             e.target.sendEther.value = 0;
                     }
                     catch(e){
@@ -38,4 +42,14 @@ Template.gallery.events({
                         Modal.show('navbarModal');
                     }
     }
+});
+
+Template.gallery.helpers({
+    sending:function(){
+        return Session.get('sending');
+    }
+})
+
+Template.gallery.onCreated(function(e){
+    Session.set('sending',false);
 });
