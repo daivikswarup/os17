@@ -1,5 +1,5 @@
 // Template.view.onCreated(function() {
-//     console.log(FlowRouter.getParam('hash'));
+//     console.log(Session.get('hash'));
 //     url = 
 // });
 
@@ -12,175 +12,112 @@ fetch1 = function () {
                 //from: "0x6e53e0a1f2373ba4b7d9d8fd4aeba07174830611"
             };
     	//address = "0x790311f15df00207c3f32d3586e73790db613167";
-		contract = web3.eth.contract(database.abi).at(address);
+		contract = web3.eth.contract(abi).at(address);
 
-    	contract.get_metadata(FlowRouter.getParam('hash'),transaction,function(err,result){
+    	contract.get_metadata(Session.get('hash'),transaction,function(err,result){
     			if(err) throw err;
     			console.log(result);
     			console.log('here');
-    			newalt = "User: "+result[2] + "\nTopic:" + result[0] + "\nLocation:"+result[1];
-    			document.getElementById('description').innerHTML = newalt;
+                //Session.set('View-user',result[2]);
+                Session.set('View-topic',result[0]);
+                Session.set('View-location',result[1]);
+                Session.set('EtherEarned',result[2].c[0]);
     	});
 
     };
 
 
-Template.view.helpers({
-     url: function () {
-        fetch1();
-        return 'http://localhost:8080/ipfs/' + FlowRouter.getParam('hash');
-        
-
+Template.viewModal.helpers({
+    getHash: function () {
+        return this.hash;
+    },
+    getTopic: function () {
+        return this.topic;
+    },
+    getEther: function() {
+        return this.ether;
+    },
+    getLocat: function () {
+        return this.location; 
+    },
+    isLocation: function(){
+        console.log(Session.get('viewType') == 'location');
+        return (Session.get('viewType') == 'location');
+    },
+    isUser: function(){
+        console.log(Session.get('viewType') == 'user');
+        return (Session.get('viewType') == 'user');
+    },
+    getURL:function(){
+        return 'http://localhost:8080/ipfs/' + this.hash;
+    },
+    images:function(){
+        return Session.get('albumImages');
+    },
+    autoSort:function(){
+        return Session.get('autoSort');
     }
+
 });
 
-//Template.view.onCreated(function(e){fetch1();})
+// Template.viewModal.onCreated(function(e){
+//     //fetch1();
+//         document.getElementById('links').onclick = 
+// })
 
-Template.view.events({
-    'click .next_user': function(e){
-        e.preventDefault();
-    	transaction = {
-                gas: 500000,
-                from: app.getDefaultAddress()
-                //from: "0x6e53e0a1f2373ba4b7d9d8fd4aeba07174830611"
-            };
-    	//address = "0x790311f15df00207c3f32d3586e73790db613167";
-		contract = web3.eth.contract(database.abi).at(address);
-
-    	contract.get_user_next(FlowRouter.getParam('hash'),transaction,function(err,new_hash){
-    			if(err) throw err;
-    			console.log(new_hash);
-    			if(new_hash!=""){
-    				FlowRouter.redirect('/view/'+new_hash);
-    			}
-    			else
-    				console.log('End of list');
-
-    	});
+Template.viewModal.events({
+    'change #autoSort': function() {
+        if (document.getElementById('autoSort').checked)
+        {
+          Session.set('autoSort', true);
+          Session.set('albumImages',Session.get('albumImages').sort(function(a,b){return(b.ether-a.ether);}));
+        }
+        else
+          Session.set('autoSort', false);
     },
-    'click .prev_user': function(e){
+    'click .load_loc': function(e){
         e.preventDefault();
-    	transaction = {
-                gas: 500000,
-                from: app.getDefaultAddress()
-                //from: "0x6e53e0a1f2373ba4b7d9d8fd4aeba07174830611"
-            };
-    	//address = "0x790311f15df00207c3f32d3586e73790db613167";
-		contract = web3.eth.contract(database.abi).at(address);
-		console.log('hehrre');
-        console.log(FlowRouter.getParam('hash'));
-    	contract.get_user_prev(FlowRouter.getParam('hash'),transaction,function(err,new_hash){
-    			if(err) throw err;
-    			console.log(new_hash);
-    			if(new_hash!=""){
-    				FlowRouter.redirect('/view/'+new_hash);
-    			}
-    			else
-    				console.log('End of list');
-
-    	});
-        // code goes here
+        populateAlbumLocation(Session.get('latestHash'),Session.get('locat_string'),10);
     },
-    'click .next_topic': function(e){
+    'click .load_topic': function(e){
         e.preventDefault();
-    	transaction = {
-                gas: 500000,
-                from: app.getDefaultAddress()
-                //from: "0x6e53e0a1f2373ba4b7d9d8fd4aeba07174830611"
-            };
-    	//address = "0x790311f15df00207c3f32d3586e73790db613167";
-		contract = web3.eth.contract(database.abi).at(address);
-
-    	contract.get_topic_next('',FlowRouter.getParam('hash'),transaction,function(err,new_hash){
-    			if(err) throw err;
-    			console.log(new_hash);
-    			if(new_hash!=""){
-    				FlowRouter.redirect('/view/'+new_hash);
-    			}
-    			else
-    				console.log('End of list');
-
-    	});
+        populateAlbumTopic(Session.get('latestHash'),Session.get('topic'),10);
     },
-    'click .prev_topic': function(e){
+    'click .load_user': function(e){
         e.preventDefault();
-    	transaction = {
-                gas: 500000,
-                from: app.getDefaultAddress()
-                //from: "0x6e53e0a1f2373ba4b7d9d8fd4aeba07174830611"
-            };
-    	//address = "0x790311f15df00207c3f32d3586e73790db613167";
-		contract = web3.eth.contract(database.abi).at(address);
-		console.log('hehrre');
-    	contract.get_topic_prev('',FlowRouter.getParam('hash'),transaction,function(err,new_hash){
-    			if(err) throw err;
-    			console.log(new_hash);
-    			if(new_hash!=""){
-    				FlowRouter.redirect('/view/'+new_hash);
-    			}
-    			else
-    				console.log('End of list');
-
-    	});
-        // code goes here
+        populateAlbumUser(Session.get('latestHash'),10);
     },
-    'click .next_loc': function(e){
-        e.preventDefault();
-    	transaction = {
-                gas: 500000,
-                from: app.getDefaultAddress()
-                //from: "0x6e53e0a1f2373ba4b7d9d8fd4aeba07174830611"
-            };
-    	//address = "0x790311f15df00207c3f32d3586e73790db613167";
-		contract = web3.eth.contract(database.abi).at(address);
-
-    	contract.get_location_next('',FlowRouter.getParam('hash'),transaction,function(err,new_hash){
-    			if(err) throw err;
-    			console.log(new_hash);
-    			if(new_hash!=""){
-    				FlowRouter.redirect('/view/'+new_hash);
-    			}
-    			else
-    				console.log('End of list');
-
-    	});
-    },
-    'click .prev_loc': function(e){
-        e.preventDefault();
-    	transaction = {
-                gas: 500000,
-                from: app.getDefaultAddress()
-                //from: "0x6e53e0a1f2373ba4b7d9d8fd4aeba07174830611"
-            };
-    	//address = "0x790311f15df00207c3f32d3586e73790db613167";
-		contract = web3.eth.contract(database.abi).at(address);
-		console.log('hehrre');
-    	contract.get_location_prev('',FlowRouter.getParam('hash'),transaction,function(err,new_hash){
-    			if(err) throw err;
-    			console.log(new_hash);
-    			if(new_hash!=""){
-    				FlowRouter.redirect('/view/'+new_hash);
-    			}
-    			else
-    				console.log('End of list');
-
-    	});
-        // code goes here
-    },
-    'click .upload': function(e){
+    'click .close': function(e){
                     e.preventDefault();
-    				FlowRouter.redirect('/');
+                    Modal.hide();
+    				//FlowRouter.redirect('/');
     },
-    'click .delete': function(e){
-                    e.preventDefault();
-    				transaction = {
-			                gas: 500000,
-			                from: app.getDefaultAddress()
-			                //from: "0x6e53e0a1f2373ba4b7d9d8fd4aeba07174830611"
-			            };
-			    	//address = "0x790311f15df00207c3f32d3586e73790db613167";
-					contract = web3.eth.contract(database.abi).at(address);
-					contract.delete_image(FlowRouter.getParam('hash'),transaction);
-    				FlowRouter.redirect('/');
-    }
+    'click #links' : function (event) {
+        event = event || window.event;
+        console.log(event);
+        var target = event.target || event.srcElement,
+            link = target.src ? target.parentNode : target,
+            options = {index: link, event: event,
+                onslide: function (index, slide) {
+                    self = this;
+                    var initializeAdditional = function (index, data, klass, self) {
+                      var text = self.list[index].getAttribute(data),
+                        node = self.container.find(klass);
+                        console.log(node);
+                      node.empty();
+                      if (text) {
+                        console.log(text);
+                        node[0].innerHTML=text;
+                      }
+                    };
+                    Session.set('hash',self.list[index].getAttribute('hash'));
+                    initializeAdditional(index, 'topic', '.topic', self);
+                    initializeAdditional(index, 'location', '.location', self);
+                    initializeAdditional(index, 'etherEarned', '.etherEarned', self);
+                  }
+                },
+            links = document.getElementsByClassName('galleryImage');
+        blueimp.Gallery(links, options);
+    },
 });
+

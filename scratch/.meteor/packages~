@@ -17,13 +17,12 @@ ecmascript@0.6.3              # Enable ECMAScript2015+ syntax in app code
 
 autopublish@1.0.7             # Publish all data to the clients (for prototyping)
 kadira:blaze-layout
-twbs:bootstrap
-peppelg:bootstrap-3-modal
 ethereum:web3
 ethereum:tools
 ethereum:elements
 ethereum:blocks
 frozeman:template-var
+silentcicero:solc
 showdown
 bevanhunt:leaflet
 stefcud:leaflet-search
@@ -33,6 +32,3 @@ fortawesome:fontawesome
 ethereum:accounts
 frozeman:persistent-minimongo2
 ethereum:dapp-styles
-mdg:camera
-less
-claudiojulio:blueimp-gallery

@@ -1,7 +1,7 @@
 contract database {
 
   // public properties, available to be called
-  address public owner;
+  address owner;
   struct image{
     string ipfs_hash;
     string prev_user_ipfs_hash;
@@ -14,12 +14,18 @@ contract database {
     string topic;
     string location;
     address user;
+    uint total;
 
   }
   
-  string[] public places;
+  string[] places;
+
+  string[] topics;
   
   
+  mapping(address => uint) withdrawable;
+
+
   mapping(string => image)  images;
 
   mapping(address => string)  user_images;
@@ -27,11 +33,8 @@ contract database {
   mapping(string => string)  location_images;
 
   mapping(string => string)  topic_images;
-  
-  event created(string hash,address user,string location,string topic);
-  event deleted(string hash);
-  
-  string public val;
+
+ 
 
   function getNumPlaces() constant public returns(uint256)
   {
@@ -43,6 +46,17 @@ contract database {
     return(places[index]);   
   }
 
+
+  function getNumTopics() constant public returns(uint256)
+  {
+      return(topics.length);
+  }
+    
+  function getTopics(uint256 index) constant public returns(string arr)
+  {
+    return(topics[index]);   
+  }
+
   // functions with the same name as the contract get invoked on deployment
   function database() public 
   {
@@ -50,7 +64,40 @@ contract database {
     owner = msg.sender;
   }
 
-  // anyone can register an address
+
+  // Should be payable but doesn't work for some reason
+  function like(string ipfshash) payable public
+  {
+      //If image doesn't exist/is deleted
+      if(bytes(images[ipfshash].ipfs_hash).length == 0)
+          throw;
+      address recipient = images[ipfshash].user;
+      withdrawable[recipient] += msg.value;
+      images[ipfshash].total += msg.value;
+  }
+
+//Send to owner
+    function ownerWithdraw() public
+    {
+        owner.transfer(address(this).balance);
+    }
+
+  function withdraw() public
+  {
+      //for security purposes.
+      uint value = withdrawable[msg.sender];
+      withdrawable[msg.sender] = 0;
+      if(!msg.sender.send(value))
+      {
+          withdrawable[msg.sender] = value;
+      }
+  }
+
+  function duetome() public constant returns(uint)
+  {
+      return withdrawable[msg.sender];
+  }
+
   function upload(string ipfshash,string location,string topic) public 
   {
     // Check that image with the same hash does not already exist
@@ -77,15 +124,17 @@ contract database {
     newImage.prev_topic_ipfs_hash = topic_images[topic];
     if(bytes(topic_images[topic]).length != 0)
       images[topic_images[topic]].next_topic_ipfs_hash = ipfshash;
+    else
+        topics.push(topic);
     topic_images[topic] = ipfshash;
     newImage.next_topic_ipfs_hash = "";
 
     newImage.topic = topic;
     newImage.location = location;
     newImage.user = msg.sender;
+    newImage.total = 0;
     
     images[ipfshash] = newImage;
-    created(ipfshash,msg.sender,location,topic);
   }
 
 
@@ -135,9 +184,9 @@ contract database {
 
   
   // get metadata from hash
-  function get_metadata(string hash) constant public returns(string,string,address)
+  function get_metadata(string hash) constant public returns(string,string,uint)
   {
-    return(images[hash].topic,images[hash].location,images[hash].user);
+    return(images[hash].topic,images[hash].location,images[hash].total);
   }
 
 
@@ -173,7 +222,6 @@ contract database {
 
     // so that this image does not get recognised when reinserted
     images[hash].ipfs_hash = "";
-    deleted(hash);
 
   }
 

@@ -1,41 +1,38 @@
-<template name="view">
-	<div class="col">
-		<p> View </p>
-		 <div class="row">
-		 	<!-- Hard coded. lol. -->
-		 	<p id="description" style="max-height:30%; max-width:30%;"></p>
-			<img src = {{url}} style="max-height:30%; max-width:30%;" data-action="zoom">
-		 </div>
+<template name="viewModal">
+	<div class="modal fade " role="dialog" >
+	`	<div class="modal-dialog container modal-l bg-info" >
 
-		 <div class="row">
-		 	<button class="next_user">Next By User</button>
-		 </div>
+			<h1> View </h1>
+		 	<!-- <p id="Topic:">Topic: {{topic}}</p><br>
+		 	<p id="Location:">Location:{{location}}</p><br>
+		 	<p id="EtherEarned:">Ether Earned:{{earned}}</p><br> -->
+		 	<input type="checkbox" id="autoSort" value={{autoSort}}>
+		 	Autosort.
+			<div class="container-fluid">
+					<div id="links">
+						{{#each images}}
+							<a href="{{getURL}}" class = "galleryImage" location='{{getLocat}}' topic='{{getTopic}}' etherEarned='{{getEther}}' hash='{{hash}}'>
+								<img src="{{getURL}}" height = 50px width=50px >
+							</a>
+						{{/each}}
+					</div>
+					<div class="row">
+						{{#if isUser}}
+							 	<button class="load_user btn-success">Load more!</button>
+						{{else}}
+							{{#if isLocation}}
+								 	<button class="load_loc btn-success">Load more!</button>
+							{{else}}
+									<button class="load_topic btn-success">Load more!</button>
+							{{/if}}
+						{{/if}}
+					</div>
+			</div>
 
-		 <div class="row">
-		 	<button class="prev_user">Previous By User</button>
-		 </div>
-
-		 <div class="row">
-		 	<button class="next_loc">Next By Location</button>
-		 </div>
-
-		 <div class="row">
-		 	<button class="prev_loc">Prev By Location</button>
-		 </div>
-
-		 <div class="row">
-		 	<button class="next_topic">Next By Topic</button>
-		 </div>
-
-		 <div class="row">
-		 	<button class="prev_topic">Prev By Topic</button>
-		 </div>
-		 <div class="row">
-		 	<button class="upload">Upload</button>
-		 </div>
-		 <div class="row">
-		 	<button class="delete">Delete</button>
-		 </div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default closemodal " data-dismiss="modal">Cancel</button>
+			</div>
+		</div>
 	</div>
 
 </template>
