@@ -83,7 +83,7 @@ Template.map.rendered = function() {
   attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }) );
 
-  add markers
+  //add markers
   markersLayer = new L.LayerGroup();  //layer contain searched elements
   
   map.addLayer(markersLayer);

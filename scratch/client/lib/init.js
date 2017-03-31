@@ -6,6 +6,7 @@ web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8000'));
 Meteor.startup(function () {
 	console.log('initializing accounts');
   	EthAccounts.init();
+  	app.setDefaultAccount(web3.eth.accounts[0]);
 });
 
 //Allow multiple popups
