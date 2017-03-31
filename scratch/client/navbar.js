@@ -1,4 +1,4 @@
-
+// get ether earned by user
 fetchdues = function(){
     transaction = {
                 gas: 500000,

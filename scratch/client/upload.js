@@ -39,14 +39,6 @@ Template.uploadModal.events({
             // FlowRouter.redirect('/view/'+hash[0].hash)
     });
     
-    // fs.readFile(image, function(err, data) {  
-    //         if (err) throw err;
-    //         console.log(data);
-    //         hash = ipfs.add(data);
-    //         console.log(hash);
-    //         web3.eth.contracts(database.abi).at(address).upload(hash,location,topic,transaction);
-    //     });
-
   },
   'click .imagepickerbutton':function(e){
         console.log('here');

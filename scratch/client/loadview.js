@@ -1,3 +1,5 @@
+//functions to initialize view pane with 10 images
+
 loadlocation = function () {
     Session.set('latestHash',"");
     Session.set('albumImages',[]);
@@ -30,7 +32,7 @@ loadUser = function () {
 
   };
 
-
+//load n more from same user
   populateAlbumUser = function(hash,count){
         transaction = {
                 gas: 500000,
@@ -72,6 +74,7 @@ loadUser = function () {
             });
   };
 
+//load n more from location
    populateAlbumLocation = function(location,hash,count){
         transaction = {
                 gas: 500000,
@@ -114,7 +117,7 @@ loadUser = function () {
             });
   };
 
-
+//load n more from topic
      populateAlbumTopic = function(topic,hash,count){
         transaction = {
                 gas: 500000,

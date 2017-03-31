@@ -1,9 +1,5 @@
-// Template.view.onCreated(function() {
-//     console.log(Session.get('hash'));
-//     url = 
-// });
 
-
+//Fetch metedata from contract
 fetch1 = function () {
 
         transaction = {
@@ -60,10 +56,6 @@ Template.viewModal.helpers({
 
 });
 
-// Template.viewModal.onCreated(function(e){
-//     //fetch1();
-//         document.getElementById('links').onclick = 
-// })
 
 Template.viewModal.events({
     'change #autoSort': function() {

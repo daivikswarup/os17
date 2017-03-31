@@ -64,7 +64,7 @@ contract database {
   }
 
 
-  // Should be payable but doesn't work for some reason
+  // Should be payable because ether can be sent
   function like(string ipfshash) payable public
   {
       //If image doesn't exist/is deleted

@@ -4,7 +4,6 @@
         <div class="row">
          <h2> Available Accounts </h2><br>
             <ul class="dapp-account-list">
-    <!-- Clickable accounts use <button> -->
                 {{#each accounts}}
                   <li>
                       {{#if isdefault address}}
@@ -23,17 +22,6 @@
                   </li> 
                 {{/each}}
             </ul>
-            <!-- <ul>
-              {{#each accounts}}
-                <li>
-                  <a class='select-account' href="#!">
-                    <span class='valign-wrapper'>
-                      {{shortAddress address}}
-                    </span>
-                  </a>
-                </li>
-              {{/each}}
-            </ul> -->
           </div>
           {{#if unlocking}}
             <h1> Unlocking!! Please wait. </h1>

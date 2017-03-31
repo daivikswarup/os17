@@ -1,19 +1,12 @@
-// on startup run resizing event
-// Meteor.startup(function() {
-//   $(window).resize(function() {
-//     console.log('resizing');
-//     $('#map').css('height', window.innerHeight - 82 - 45);
-//     console.log(window.innerHeight - 82 - 45);
-//   });
 
-//   $(window).resize(); // trigger resize event 
-// });
  
 // create marker collection
 var Markers = new Meteor.Collection('markers');
 
 Meteor.subscribe('markers');
 
+
+//Function to be called periodicallyto reset markers and topics
 resetMap = function(){
   Session.set('claimClicked',false);
   transaction = {
@@ -21,7 +14,6 @@ resetMap = function(){
                 from: app.getDefaultAddress()
                 //from: "0x6e53e0a1f2373ba4b7d9d8fd4aeba07174830611"
             };
-        ////////////populate map with markers from sample data
   markersLayer.clearLayers();
   web3.eth.contract(abi).at(address).getNumPlaces(transaction,function(err,count){
       for(var i =0 ; i<count; i= i + 1) {
@@ -79,32 +71,19 @@ getLocatString = function(lat,lng,title)
 }
 
 
+//Initialize map
 Template.map.rendered = function() {
   L.Icon.Default.imagePath = '/packages/bevanhunt_leaflet/images/';
 
-  // var map = L.map('map', {
-  //   doubleClickZoom: false
-  // }).setView([49.25044, -123.137], 13);
-
-  // L.tileLayer.provider('OpenStreetMap.Mapnik').addTo(map);
-
-
-
-  // // add clustermarkers
-  // var markers = L.markerClusterGroup();
-  // map.addLayer(markers);
-
-  ///////hererererer
-
-
-
   map = new L.Map('map').setView([22.316492798844163,87.30646133422853], 14);;  //set center to KGP!
 
+  //Open Street map layer
   map.addLayer(new  L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   maxZoom: 19,
   attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }) );
 
+  add markers
   markersLayer = new L.LayerGroup();  //layer contain searched elements
   
   map.addLayer(markersLayer);
@@ -120,7 +99,8 @@ Template.map.rendered = function() {
 
   map.addControl( controlSearch );
 
-    map.on('dblclick', function(event) {
+  //add new marker on double click
+  map.on('dblclick', function(event) {
     console.log(event.latlng);
     try{
       Session.set('UploadHash','');
@@ -128,15 +108,11 @@ Template.map.rendered = function() {
       Session.set('locat',getLatLngString(event.latlng["lat"],event.latlng["lng"]));
       Session.set('locat_title','');
       Modal.show('uploadModal');
-      //document.getElementById('locat_from_map').value= getLatLngString(event.latlng["lat"],event.latlng["lng"]);
     }
     catch(err){ throw err};
-    try{
-      // document.getElementById('browse-locat').value= String(event.latlng["lat"] + ',' + event.latlng["lng"]);
-    }
-    catch(err){};
-    // Markers. = [{latlng: event.latlng}];
   });
+
+  //geo search
   map.addControl( new L.Control.Search({
     url: 'http://nominatim.openstreetmap.org/search?format=json&q={s}',
     jsonpParam: 'json_callback',
@@ -148,19 +124,11 @@ Template.map.rendered = function() {
     minLength: 2
   }) );
 
-  //   function sortParks(a, b) {
-  //   var _a = a.feature.properties.park;
-  //   var _b = b.feature.properties.park;
-  //   if (_a < _b) {
-  //     return -1;
-  //   }
-  //   if (_a > _b) {
-  //     return 1;
-  //   }
-  //   return 0;
-  // }
   Session.set('AllTopics',[]);
+
+
   // From http://odoe.net/blog/custom-leaflet-control/
+  // Topic search
   TopicControl = L.Control.extend({
     options: {
       // topright, topleft, bottomleft, bottomright
@@ -228,7 +196,7 @@ Template.map.rendered = function() {
   });
   map.addControl(new TopicControl());
 
-
+  // Add buttons to open modals
   resetMap();
   L.easyButton('fa-refresh', function(btn, map){
     console.log('clikkk');
@@ -251,28 +219,4 @@ Template.map.rendered = function() {
   }).addTo( map );
   // Reload map markers and topics every 120 seconds
   var interval = setInterval(resetMap, 120000);
-  // sidebar = L.control.sidebar('sidebar').addTo(map);
-  // var query = Markers.find();
-  // query.observe({
-  //   added: function (document) {
-  //     var marker = L.marker(document.latlng).addTo(map)
-  //       .on('click', function(event) {
-  //         map.removeLayer(marker);
-  //         Markers.remove({_id: document._id});
-  //       });
-  //      markers.addLayer(marker);
-  //   },
-  //   removed: function (oldDocument) {
-  //     layers = map._layers;
-  //     var key, val;
-  //     for (key in layers) {
-  //       val = layers[key];
-  //       if (val._latlng) {
-  //         if (val._latlng.lat === oldDocument.latlng.lat && val._latlng.lng === oldDocument.latlng.lng) {
-  //           map.removeLayer(val);
-  //         }
-  //       }
-  //     }
-  //   }
-  // });
 };
